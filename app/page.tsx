@@ -1,7 +1,7 @@
 import ChatBot from '@/components/ChatBot';
 import FeaturedProduct from '@/components/FeaturedProduct';
-import SimilarProducts from '@/components/SimilarProducts';
-import AlternativeProducts from '@/components/AlternativeProducts';
+// import SimilarProducts from '@/components/SimilarProducts';
+// import AlternativeProducts from '@/components/AlternativeProducts';
 import RecommendedProducts from '@/components/RecommendedProducts';
 
 const Home: React.FC = () => {
@@ -24,14 +24,14 @@ const Home: React.FC = () => {
   
 
   const similarProductsData = [
-    { id: '1', title: 'Similar Product 1 Title', rating: 4.8, price: 33.00 },
-    { id: '2', title: 'Similar Product 2 Title', rating: 4.8, price: 33.00 },
-    { id: '3', title: 'Similar Product 3 Title', rating: 4.8, price: 33.00 },
+    { id: 1, title: 'Similar Product 1 Title', rating: 4.8, price: 33.00, imageUrl: 'https://via.placeholder.com/150' },
+    { id: 2, title: 'Similar Product 2 Title', rating: 4.8, price: 33.00, imageUrl: 'https://via.placeholder.com/150' },
+    { id: 3, title: 'Similar Product 3 Title', rating: 4.8, price: 33.00, imageUrl: 'https://via.placeholder.com/150' },
   ];
-
+  
   const alternativeProductsData = [
-    { id: 'a1', title: 'Alt Product 1 Title', rating: 4.8, price: 33.00 },
-    { id: 'a2', title: 'Alt Product 2 Title', rating: 4.8, price: 33.00 },
+    { id: 101, title: 'Alt Product 1 Title', rating: 4.8, price: 33.00, imageUrl: 'https://via.placeholder.com/150' },
+    { id: 102, title: 'Alt Product 2 Title', rating: 4.8, price: 33.00, imageUrl: 'https://via.placeholder.com/150' },
     // ... more products
   ];
 
