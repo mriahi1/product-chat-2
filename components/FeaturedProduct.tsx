@@ -1,23 +1,14 @@
 "use client";
-// components/FeaturedProduct.tsx
 import React, { useState } from 'react';
+import { Product } from '@/interfaces/constants';
 
-interface FeaturedProductProps {
-  title: string;
-  images: string[]; // Array of image URLs
-  rating: number; // Rating value out of 5
-  description: string;
-  price: number;
-  distributor: string;
-  countryOfOrigin: string;
-  manufacturer: string;
-}
-
-const FeaturedProduct: React.FC<FeaturedProductProps> = ({
+const FeaturedProduct: React.FC<Product> = ({
+  id,
   title,
+  description,
+  imageUrl,
   images,
   rating,
-  description,
   price,
   distributor,
   countryOfOrigin,
@@ -29,48 +20,80 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = ({
     setSelectedImage(image);
   };
 
-  return (
-    <div className="flex flex-col items-center bg-white p-5 rounded-lg shadow-md w-full">
-      <div className="flex md:flex-row flex-col items-center">
-        <div className="flex flex-col space-y-2 mb-4 md:mb-0 md:mr-4">
-          {images.map((img, index) => (
-            <button key={index} onClick={() => handleThumbnailClick(img)}>
-              <img
-                src={img}
-                alt={`Thumbnail ${index + 1}`}
-                className={`w-16 h-16 object-cover rounded ${selectedImage === img ? 'border-2 border-blue-500' : ''}`}
-              />
-            </button>
-          ))}
-        </div>
-        <img
-          src={selectedImage}
-          alt="Selected Product"
-          className="w-full md:w-64 h-64 object-contain mb-4 md:mb-0"
-        />
-      </div>
-      <h3 className="text-xl font-semibold my-2">{title}</h3>
-      <div className="flex">
+  const renderStarRatingAndButton = () => (
+    <div className="flex justify-between items-center w-full">
+      <div className="flex items-center">
         {[...Array(5)].map((_, index) => (
-          <span key={index} className="text-yellow-400 text-xl">{index < rating ? '★' : '☆'}</span>
+          <span key={index} className={`text-yellow-400 text-xl ${index < rating ? 'text-yellow-500' : 'text-gray-300'}`}>★</span>
         ))}
       </div>
       <button 
-        className="my-3 bg-blue-600 text-white px-6 py-2 rounded-full focus:outline-none hover:bg-blue-700 transition duration-300 ease-in-out"
+        className="bg-blue-500 text-white px-6 py-2 rounded-full focus:outline-none hover:bg-blue-600 transition duration-300 ease-in-out"
         onClick={() => window.open('https://www.amazon.com', '_blank')}
       >
         Visit Shop
       </button>
-      <p className="text-gray-600 text-center mb-2">{description}</p>
-      <p className="text-lg font-bold mb-2">${price}</p>
-      <div className="text-sm text-gray-500">
-        <p className="font-bold">Product Details</p>
-        <p>Distributor: {distributor}</p>
-        <p>Country of Origin: {countryOfOrigin}</p>
-        <p>Manufacturer: {manufacturer}</p>
+    </div>
+  );
+
+  // Helper function to format price with currency and decimals
+  const formatPrice = (price: number) => {
+    const [whole, decimal] = price.toFixed(2).split('.');
+    return (
+      <div className="flex items-baseline">
+        <span className="text-2xl font-bold">${whole}</span>
+        <span className="text-sm font-normal">.{decimal}</span>
+      </div>
+    );
+  };
+
+  return (
+    <div className="bg-white p-5 rounded-lg shadow-md w-full flex">
+      <div className="flex flex-col space-y-2 mr-4">
+        {images.map((img, index) => (
+          <button 
+            key={index} 
+            onClick={() => handleThumbnailClick(img)} 
+            className={`w-16 h-16 object-cover rounded ${selectedImage === img ? 'ring-2 ring-blue-500' : 'ring-1 ring-gray-300'}`}
+          >
+            <img
+              src={img}
+              alt={`Thumbnail ${index + 1}`}
+              className="w-full h-full object-cover rounded"
+            />
+          </button>
+        ))}
+      </div>
+      <div className="flex-grow flex flex-col">
+        <img
+          src={selectedImage}
+          alt="Selected Product"
+          className="w-full h-auto object-cover mb-4"
+        />
+
+        <div style={{marginLeft:"-80px"}}>
+          <h3 className="text-3xl font-bold my-2 text-left">{title}</h3>
+          {renderStarRatingAndButton()}
+          <hr className="border-t border-gray-300 my-2" /> {/* Visual separator */}
+          <div className="flex justify-between items-center w-full my-2">
+            <h4 className="text-lg font-semibold text-left">About this Item</h4>
+            {formatPrice(price)}
+          </div>
+          <p className="text-gray-600 text-left mb-2">{description}</p>
+          <dl className="text-sm text-gray-500 text-left">
+            <h4 className="text-lg font-semibold">Product Details</h4>
+            <dt className="font-bold mt-2">Distributor:</dt>
+            <dd>{distributor}</dd>
+            <dt className="font-bold mt-2">Country of Origin:</dt>
+            <dd>{countryOfOrigin}</dd>
+            <dt className="font-bold mt-2">Manufacturer:</dt>
+            <dd>{manufacturer}</dd>
+          </dl>
+        </div>
       </div>
     </div>
   );
 };
 
 export default FeaturedProduct;
+

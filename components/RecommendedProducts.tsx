@@ -1,17 +1,6 @@
 import React from 'react';
+import { RecommendedProductsProps } from '@/interfaces/constants';
 
-interface Product {
-  id: number;
-  title: string;
-  rating: number;
-  price: number;
-  imageUrl: string;
-}
-
-interface RecommendedProductsProps {
-  similarProducts: Product[];
-  secondhandProducts: Product[];
-}
 
 const RecommendedProducts: React.FC<RecommendedProductsProps> = ({
   similarProducts,

@@ -1,12 +1,9 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
+import {ChatMessage, ChatBotProps, Product} from '@/interfaces/constants';
 
-interface ChatMessage {
-  sender: 'user' | 'bot';
-  content: string;
-}
 
-const ChatBot: React.FC = () => {
+const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isBotThinking, setIsBotThinking] = useState(false);
@@ -14,6 +11,15 @@ const ChatBot: React.FC = () => {
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const getRecommendedProduct = (userInput: string): Product | undefined => {
+    userInput = userInput.toLowerCase(); 
+
+    const recommendedProduct = productData.find((product) =>
+      product.title.toLowerCase().includes(userInput)
+    );
+    return recommendedProduct;
   };
 
   useEffect(() => {
@@ -45,17 +51,27 @@ const ChatBot: React.FC = () => {
     setIsBotThinking(true);
   };
 
-  const handleSendMessage = () => {
-    sendMessage(inputMessage);
+  const performSearch = (searchTerm: string) => {
+    sendMessage(searchTerm);
     setInputMessage('');
+    const recommendedProduct = getRecommendedProduct(searchTerm);
+    if (recommendedProduct) {
+      if (onProductSelect) {
+        onProductSelect(recommendedProduct);
+      }
+    }
+  };
+
+  const handleSendMessage = () => {
+    performSearch(inputMessage);
   };
 
   const handleSuggestionClick = (suggestion: string) => {
-    sendMessage(suggestion);
+    performSearch(suggestion);
   };
 
   return (
-    <div className="border border-gray-300 rounded-lg shadow-lg flex flex-col">
+    <div className="bg-white border border-gray-300 rounded-lg shadow-lg flex flex-col">
       <div className="overflow-y-auto p-3 space-y-2" style={{ height: 'calc(100vh - 350px)' }}> {/* Adjusted for chatbot size and input area */}
         {messages.length === 0 && !isBotThinking ? (
           <>
