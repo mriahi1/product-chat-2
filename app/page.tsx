@@ -56,7 +56,7 @@ const Home: React.FC = () => {
     const loadMockData = async () => {
       const data = await mockProductData();
       setProducts(data);
-      setSelectedProduct(data[0]);
+      // setSelectedProduct(data[0]);
     };
 
     loadMockData();
@@ -66,9 +66,9 @@ const Home: React.FC = () => {
     setSelectedProduct(product);
   };
 
-  if (!selectedProduct) {
-    return <div>{t?.('loading')}</div>; // Loading state or placeholder
-  }
+  // if (!selectedProduct) {
+  //   return <div>{t?.('loading')}</div>; // Loading state or placeholder
+  // }
 
   const handleSearchSubmit = (event: React.FormEvent) => {
     event.preventDefault(); // Prevent the default form submit action
@@ -147,15 +147,23 @@ const Home: React.FC = () => {
         </aside>
 
         <section className="w-full md:w-5/12 p-4">
+          {selectedProduct ? (
           <FeaturedProduct {...selectedProduct} />
+          ): (
+          <></>
+          )}
         </section>
 
         <aside className="w-full md:w-4/12 p-4">
+        {selectedProduct ? (
           <RecommendedProducts
             similarProducts={similarProducts}
             alternativeProducts={alternativeProducts}
             onProductSelect={updateSelectedProduct}
           />
+          ): (
+            <></>
+            )}
         </aside>
       </main>
 
