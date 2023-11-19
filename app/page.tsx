@@ -15,7 +15,7 @@ import { TranslationsProvider } from "@/contexts/TranslationsContext";
 
 
 const Home: React.FC = () => {
-  const [showOverlay, setShowOverlay] = useState<boolean>(true);
+  const [showOverlay, setShowOverlay] = useState<boolean>(false);
   const [showSignupModal, setShowSignupModal] = useState<boolean>(false);
   const [language, setLanguage] = useState<"en" | "fr">("en");
   const [inputMessage, setInputMessage] = useState<string>("");
@@ -125,7 +125,7 @@ const Home: React.FC = () => {
         </Modal>
       )}
 
-    <div className="container mx-auto my-8">
+    <div className="container">
       <header className="flex justify-between items-center p-4 header">
         <div className="logo">
           <h1>{t("logo")}</h1>
@@ -136,7 +136,7 @@ const Home: React.FC = () => {
       </header>
 
       <main className="flex flex-col md:flex-row">
-        <aside className="w-full md:w-3/12 p-4">
+        <aside className="w-full md:w-3/12 p-4 h-full">
           <ChatBot
             productData={products}
             onProductSelect={updateSelectedProduct}

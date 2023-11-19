@@ -95,7 +95,7 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
 
   return (
     <div>
-      <div className="bg-white p-5 rounded-lg shadow-md w-full flex">
+      <div className="component p-5 w-full flex">
         <div className="flex flex-col space-y-2 mr-4">
           {images.map((img, index) => (
             <button
