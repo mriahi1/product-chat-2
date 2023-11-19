@@ -36,7 +36,7 @@ const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
       className="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full" 
       id="my-modal" 
       onClick={(e) => {
-        if (e.target.id === "my-modal") {
+        if ((e.target as HTMLElement).id === "my-modal") {
           onClose();
         }
       }}
