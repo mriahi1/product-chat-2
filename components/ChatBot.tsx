@@ -1,51 +1,54 @@
-"use client";
 import React, { useState, useEffect, useRef } from 'react';
-import {ChatMessage, ChatBotProps, Product} from '@/interfaces/constants';
+import { Product } from '@/types/Product';
+import { ChatMessage } from '@/types/ChatMessage';
+import { useTranslations } from '@/contexts/TranslationsContext';
 
+
+interface ChatBotProps {
+  onProductSelect?: (product: Product) => void;
+  productData: Product[];
+}
+
+const suggestions = [
+  { title: 'Gift Ideas', subtitle: 'For my mother' },
+  { title: 'Find good deal', subtitle: 'For computer monitor under 200€' },
+  { title: 'Suggest jewelry', subtitle: 'that is locally sourced' },
+  // ... add more suggestions as needed
+];
 
 const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isBotThinking, setIsBotThinking] = useState(false);
-  const messagesEndRef = useRef<null | HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const translations = useTranslations();
+  const t = translations?.t;
+
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const getRecommendedProduct = (userInput: string): Product | undefined => {
-    userInput = userInput.toLowerCase(); 
-
-    const recommendedProduct = productData.find((product) =>
-      product.title.toLowerCase().includes(userInput)
-    );
-    return recommendedProduct;
+    if (messages.length > 8) {
+      chatContainerRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages.length]);
 
-  useEffect(() => {
-    if (isBotThinking) {
-      const timer = setTimeout(() => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { sender: 'bot', content: "Here's what I found" },
-        ]);
-        setIsBotThinking(false);
-      }, 1000); // Bot "thinks" for 1 second
-
-      return () => clearTimeout(timer);
-    }
-  }, [isBotThinking]);
+  const getRecommendedProduct = (userInput: string): Product | undefined => {
+    const lowerCaseUserInput = userInput.toLowerCase();
+    return productData.find((product) =>
+      product.title.toLowerCase().includes(lowerCaseUserInput)
+    );
+  };
 
   const sendMessage = (message: string) => {
     if (message.trim() === '') return;
 
     setMessages((prevMessages) => [
       ...prevMessages,
-      { sender: 'user', content: message.trim() }
+      { sender: 'user', content: message.trim() },
     ]);
 
     setIsBotThinking(true);
@@ -55,10 +58,8 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
     sendMessage(searchTerm);
     setInputMessage('');
     const recommendedProduct = getRecommendedProduct(searchTerm);
-    if (recommendedProduct) {
-      if (onProductSelect) {
-        onProductSelect(recommendedProduct);
-      }
+    if (recommendedProduct && onProductSelect) {
+      onProductSelect(recommendedProduct);
     }
   };
 
@@ -70,35 +71,54 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
     performSearch(suggestion);
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  };
+
+  useEffect(() => {
+    if (isBotThinking) {
+      const timer = setTimeout(() => {
+        setIsBotThinking(false);
+      }, 800);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isBotThinking]);
+
   return (
     <div className="bg-white border border-gray-300 rounded-lg shadow-lg flex flex-col">
-      <div className="overflow-y-auto p-3 space-y-2" style={{ height: 'calc(100vh - 350px)' }}> {/* Adjusted for chatbot size and input area */}
+      <div ref={chatContainerRef} className="overflow-y-auto p-3 space-y-2" style={{ height: 'calc(100vh - 350px)' }}>
         {messages.length === 0 && !isBotThinking ? (
           <>
-            <p className="text-gray-900 font-bold mb-4">What are you looking for today?</p>
-            <button
-              onClick={() => handleSuggestionClick('Gift Ideas')}
-              className="text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 transition ease-in-out duration-150 w-full text-left"
-            >
-              Gift Ideas
-            </button>
-            <button
-              onClick={() => handleSuggestionClick('Find good deal')}
-              className="text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 transition ease-in-out duration-150 w-full text-left"
-            >
-              Find good deal
-            </button>
+            <p className="text-gray-900 font-bold mb-4">{t?.('chat_title')}</p>
+            {suggestions.map((suggestion, index) => (
+              <button
+                key={index}
+                onClick={() => handleSuggestionClick(suggestion.title)}
+                className="text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 transition ease-in-out duration-150 w-full text-left"
+              >
+                {suggestion.title}
+                <div className="text-gray-500 text-sm">{suggestion.subtitle}</div>
+              </button>
+            ))}
           </>
         ) : (
           messages.map((message, index) => (
-            <div key={index} className={`break-words p-3 rounded-lg ${message.sender === 'user' ? 'bg-gray-300 text-gray-800 align-left mb-2' : 'bg-blue-500 text-white align-right mb-2'}`}>
+            <div
+              key={index}
+              className={`break-words p-3 rounded-lg ${
+                message.sender === 'user' ? 'bg-gray-300 text-gray-800 align-left mb-2' : 'bg-blue-500 text-white align-right mb-2'
+              }`}
+            >
               {message.content}
             </div>
           ))
         )}
         {isBotThinking && (
           <div className="break-words p-3 bg-blue-500 text-white align-right rounded-lg mb-2">
-            Thinking...
+            {t?.('chat_loading')}
           </div>
         )}
         <div ref={messagesEndRef} />
@@ -111,13 +131,18 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
           className="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none"
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
-          onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+          onKeyPress={handleKeyPress}
         />
-        <button
-          onClick={handleSendMessage}
-          className="flex-none text-gray-500 p-2 focus:outline-none"
-        >
-          <svg className="w-6 h-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+        <button onClick={handleSendMessage} className="flex-none text-gray-500 p-2 focus:outline-none">
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
             <path d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
           </svg>
         </button>
