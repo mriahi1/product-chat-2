@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, PropsWithChildren } from 'react';
 import translations from '@/translations';
 
 // Define your translations with an index signature
@@ -25,18 +25,22 @@ interface TranslationsContextProps {
 
 const TranslationsContext = createContext<TranslationsContextProps | null>(null);
 
-export const useTranslations = () => useContext(TranslationsContext);
-
-export const TranslationsProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<string>('en');
+export const TranslationProvider: React.FC<PropsWithChildren> = ({
+  children
+}) => {
+  const [language, setLanguage] = useState<string>('fr');
   const t = (key: string) => {
     const langDictionary = translationsDict[language] || {};
     return langDictionary[key] || '';
   };
 
+  if (!language) return (<>Loading...</>);
+
   return (
-    <TranslationsContext.Provider value={{ t, language, setLanguage }}>
+    <TranslationsContext.Provider value={{ language, setLanguage, t }}>
       {children}
     </TranslationsContext.Provider>
   );
 };
+
+export const useTranslation = () => useContext(TranslationsContext) as TranslationsContextProps

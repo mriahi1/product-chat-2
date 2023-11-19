@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Product } from "@/types/Product";
-import { useTranslations } from '@/contexts/TranslationsContext';
+import { useTranslation } from '@/contexts/TranslationsContext';
 
 interface FeaturedProductProps {
   id: number;
@@ -19,9 +19,7 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
   const [useMockData, setUseMockData] = useState(true);
   const [product, setProduct] = useState<Product>({} as Product);
   const [selectedImage, setSelectedImage] = useState<string>("");
-  // const [isLoading, setIsLoading] = useState(true);
-  const translations = useTranslations();
-  const t = translations?.t;
+  const { t } = useTranslation();
 
   useEffect(() => {
     // Update selected image when the images array changes
@@ -160,10 +158,10 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
           </div>
         </div>
       </div>
-
+{/* 
       <button onClick={() => setUseMockData(!useMockData)}>
       {t?.('toggle_data_source')}
-      </button>
+      </button> */}
     </div>
   );
 };

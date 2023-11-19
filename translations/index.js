@@ -15,13 +15,19 @@ const en = {
     manufacturer: "Manufacturer",
     similar_products: "Similar Products",
     more: "More",
-    secondhand_products: "Secondhand Products",
+    secondhand_alternatives: "Secondhand Alternatives",
     visit_shop: "Visit Shop",
     about_this_item: "About this item",
     toggle_data_source: "Toggle data source",
     search_placeholder: "Search for products",
     search: "Search",
-    // ... other translations
+    message_placeholder: "Type your message here...",
+    gift_ideas: "Gift Ideas",
+    for_my_mother: "for my mother",
+    find_a_deal: "Find a Deal",
+    for_a_computer_monitor_less_than_200: "for a computer monitor less than $200",
+    suggest_jewelry: "Suggest Jewelry",
+    that_is_locally_sourced: "that is locally sourced",
   };
 //   export default en;
   
@@ -42,13 +48,19 @@ const en = {
     manufacturer: "Fabricant",
     similar_products: "Produits similaires",
     more: "Plus",
-    secondhand_products: "Produits d'occasion",
+    secondhand_alternatives: "Alternatives d'occasion",
     visit_shop: "Visitez la boutique",
     about_this_item: "À propos de cet article",
     toggle_data_source: "Basculer la source de données",
     search_placeholder: "Rechercher des produits",
     search: "Recherche",
-    // ... other translations
+    message_placeholder: "Tapez votre message ici...",
+    gift_ideas: "Idées cadeaux",
+    for_my_mother: "pour ma mère",
+    find_a_deal: "Trouver une bonne affaire",
+    for_a_computer_monitor_less_than_200: "pour un moniteur d'ordinateur de moins de 200 €",
+    suggest_jewelry: "Suggérer des bijoux",
+    that_is_locally_sourced: "qui est d'origine locale",
   };
 //   export default fr;
 

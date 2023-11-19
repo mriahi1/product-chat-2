@@ -1,27 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Product } from "@/types/Product";
 import { ChatMessage } from "@/types/ChatMessage";
-import { useTranslations } from "@/contexts/TranslationsContext";
+import { useTranslation } from "@/contexts/TranslationsContext";
 
 interface ChatBotProps {
   onProductSelect?: (product: Product) => void;
   productData: Product[];
 }
 
-const suggestions = [
-  { title: "Gift Ideas", subtitle: "For my mother" },
-  { title: "Find good deal", subtitle: "For computer monitor under 200€" },
-  { title: "Suggest jewelry", subtitle: "that is locally sourced" },
-  // ... add more suggestions as needed
-];
-
 const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const [isBotThinking, setIsBotThinking] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const translations = useTranslations();
-  const t = translations?.t;
+  const { t } = useTranslation();
+
+  const suggestions = [
+    { title: t("gift_ideas"), subtitle: t('for_my_mother') },
+    { title: t('find_a_deal'), subtitle: t('for_a_computer_monitor_less_than_200') },
+    { title: t('suggest_jewelry'), subtitle: t('that_is_locally_sourced')  },
+    // ... add more suggestions as needed
+  ];
+  
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -89,6 +89,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
   }, [isBotThinking]);
 
   return (
+    <>
     <div className="component flex flex-col">
       <div
         ref={chatContainerRef}
@@ -136,7 +137,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
       <div className="border-t border-gray-300 p-2 flex items-center space-x-2 bg-white">
         <input
           type="text"
-          placeholder="Message Product Chat ..."
+          placeholder={t('message_placeholder')}
           className="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none"
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
@@ -160,6 +161,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
         </button>
       </div>
     </div>
+  </>
   );
 };
 

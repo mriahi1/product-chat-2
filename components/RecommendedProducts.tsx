@@ -1,6 +1,6 @@
 import React from 'react';
 import { Product } from '@/types/Product';
-import { useTranslations } from '@/contexts/TranslationsContext';
+import { useTranslation } from '@/contexts/TranslationsContext';
 
 
 interface RecommendedProductsProps {
@@ -15,8 +15,7 @@ const RecommendedProducts: React.FC<RecommendedProductsProps> = ({
   alternativeProducts,
   onProductSelect,
 }) => {
-  const translations = useTranslations();
-  const t = translations?.t;
+  const { t } = useTranslation();
 
   return (
     <div className="space-y-6">
