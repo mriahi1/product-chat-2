@@ -52,7 +52,7 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
   const renderRating = (value: number, icon: string, color: { active: string, inactive: string }) => (
     <>
       <div className="flex items-center mr-4">
-        {value}
+        {value.toFixed(1)}
       </div>
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center">
@@ -125,9 +125,9 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
           <div style={{ marginLeft: "-80px" }}>
             <h3 className="text-3xl font-bold my-2 text-left">{title}</h3>
             <div className="flex justify-between items-center w-full">
-              {renderRating(4.8, '★', { active: 'text-yellow-500', inactive: 'text-gray-300' })}
+              {renderRating(product.rating, '★', { active: 'text-yellow-500', inactive: 'text-gray-300' })}
               
-              {renderRating(3.8, '+', { active: 'text-green-500', inactive: 'text-gray-300' })}
+              {renderRating(product.rating, '+', { active: 'text-green-500', inactive: 'text-gray-300' })}
               {/* {renderRating("eco")} */}
               {renderCTA()}
               
@@ -140,21 +140,29 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
               {formatPrice(price, "€")}
             </div>
             <p className="text-gray-600 text-left mb-2">{description}</p>
-            <dl className="text-sm text-gray-500 text-left">
+            <dl className="text-sm text-gray-500">
               <h4 className="text-lg font-semibold">{t?.('product_details')}</h4>
-              <dt className="font-bold mt-2">{t?.('distributor')}:</dt>
-              <dd>{distributor}</dd>
-              <dt className="font-bold mt-2">{t?.('country_of_origin')}:</dt>
-              <dd>{countryOfOrigin}</dd>
-              <dt className="font-bold mt-2">{t?.('manufacturer')}:</dt>
-              <dd>{manufacturer}</dd>
+              <div className="flex flex-col md:flex-row md:flex-wrap md:justify-between">
+                <div className="flex">
+                  <dt className="font-bold mt-2 mr-1">{t?.('distributor')}:</dt>
+                  <dd className="mt-2">{distributor}</dd>
+                </div>
+                <div className="flex">
+                  <dt className="font-bold mt-2 mr-1">{t?.('country_of_origin')}:</dt>
+                  <dd className="mt-2">{countryOfOrigin}</dd>
+                </div>
+                <div className="flex">
+                  <dt className="font-bold mt-2 mr-1">{t?.('manufacturer')}:</dt>
+                  <dd className="mt-2">{manufacturer}</dd>
+                </div>
+              </div>
             </dl>
           </div>
         </div>
       </div>
 
       <button onClick={() => setUseMockData(!useMockData)}>
-      {t?.('Toggle data source')}
+      {t?.('toggle_data_source')}
       </button>
     </div>
   );

@@ -8,9 +8,9 @@ import FeaturedProduct from "@/components/FeaturedProduct";
 import ProductPage from "@/components/ProductPage";
 import RecommendedProducts from "@/components/RecommendedProducts";
 import translations from "@/translations";
-import {
-  combinedProducts,
-} from "./sample_data"; 
+// import {
+//   combinedProducts,
+// } from "./sample_data"; 
 import { TranslationsProvider } from "@/contexts/TranslationsContext";
 
 
@@ -22,8 +22,16 @@ const Home: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
 
-  const similarProducts = products.slice(0, 3);
-  const alternativeProducts = products.slice(3, 6);
+  const getSimilarProducts = (products: Product[]): Product[] => {
+    return products.slice(0, 3);
+  };
+
+  const getAlternativeProducts = (products: Product[]): Product[] => {
+    return products.slice(3, 6);
+  };
+
+  const similarProducts = getSimilarProducts(products);
+  const alternativeProducts = getAlternativeProducts(products);
 
   useEffect(() => {
     const loadMockData = async () => {
@@ -74,6 +82,7 @@ const Home: React.FC = () => {
           <RecommendedProducts
             similarProducts={similarProducts}
             alternativeProducts={alternativeProducts}
+            onProductSelect={updateSelectedProduct}
           />
         </aside>
       </main>
@@ -82,9 +91,9 @@ const Home: React.FC = () => {
         {/* <aside className="w-full md:w-6/12 p-4">
           <ProductsList />
         </aside> */}
-        <aside className="w-full md:w-6/12 p-4">
+        {/* <aside className="w-full md:w-6/12 p-4">
           <ProductPage />
-        </aside>
+        </aside> */}
       </main>
 
       <footer className="p-4">{/* Footer content here */}</footer>

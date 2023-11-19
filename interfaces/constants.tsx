@@ -9,8 +9,3 @@ export interface Product {
   countryOfOrigin: string;
   manufacturer: string;
 }
-
-export interface RecommendedProductsProps {
-  similarProducts: Product[];
-  alternativeProducts: Product[];
-}

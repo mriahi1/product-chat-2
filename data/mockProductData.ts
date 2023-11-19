@@ -19,7 +19,7 @@ const generateMockProducts = (count: number) => {
           `/images/products/jewelry/3.png`
         ],
         price: 50 + i, // Example price
-        rating: 4.0 + (i % 5) * 0.2, // Example rating
+        rating: 3.0 + (i % 5) * 0.2, // Example rating
         distributor: `Distributor ${i}`,
         countryOfOrigin: "Spain",
         manufacturer: `Spanish Factory ${i}`,
