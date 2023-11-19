@@ -24,13 +24,17 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
   const translations = useTranslations();
   const t = translations?.t;
 
+  const chatContainerRef = useRef<HTMLDivElement>(null);
+
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messages.length > 8) {
+      chatContainerRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages.length]);
 
   const getRecommendedProduct = (userInput: string): Product | undefined => {
     const lowerCaseUserInput = userInput.toLowerCase();
@@ -67,9 +71,25 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
     performSearch(suggestion);
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  };
+
+  useEffect(() => {
+    if (isBotThinking) {
+      const timer = setTimeout(() => {
+        setIsBotThinking(false);
+      }, 800);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isBotThinking]);
+
   return (
     <div className="bg-white border border-gray-300 rounded-lg shadow-lg flex flex-col">
-      <div className="overflow-y-auto p-3 space-y-2" style={{ height: 'calc(100vh - 350px)' }}>
+      <div ref={chatContainerRef} className="overflow-y-auto p-3 space-y-2" style={{ height: 'calc(100vh - 350px)' }}>
         {messages.length === 0 && !isBotThinking ? (
           <>
             <p className="text-gray-900 font-bold mb-4">{t?.('chat_title')}</p>
@@ -111,6 +131,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
           className="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none"
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
+          onKeyPress={handleKeyPress}
         />
         <button onClick={handleSendMessage} className="flex-none text-gray-500 p-2 focus:outline-none">
           <svg

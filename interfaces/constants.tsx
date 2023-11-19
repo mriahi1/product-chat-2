@@ -12,5 +12,5 @@ export interface Product {
 
 export interface RecommendedProductsProps {
   similarProducts: Product[];
-  secondhandProducts: Product[];
+  alternativeProducts: Product[];
 }

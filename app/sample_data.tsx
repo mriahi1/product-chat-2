@@ -76,4 +76,4 @@ export const productDetails = {
     // Add more products with distinct values as needed
   ];
   
-  export const combinedProducts = [...similarProductsData, ...alternativeProductsData, productDetails];
+  export const combinedProducts = [productDetails, ...similarProductsData, ...alternativeProductsData];

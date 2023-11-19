@@ -1,33 +1,47 @@
 "use client";
-import React, { useState } from "react";
-import { Product } from "@/interfaces/constants";
+import React, { useState, useEffect } from "react";
+import { Product } from "@/types/Product";
+import { mockProductData } from "@/data/mockProductData";
 
 import ChatBot from "@/components/ChatBot";
 import FeaturedProduct from "@/components/FeaturedProduct";
-import ProductsList from "@/components/ProductsList";
 import ProductPage from "@/components/ProductPage";
-// import SimilarProducts from '@/components/SimilarProducts';
-// import AlternativeProducts from '@/components/AlternativeProducts';
 import RecommendedProducts from "@/components/RecommendedProducts";
 import translations from "@/translations";
 import {
   combinedProducts,
-  similarProductsData,
-  alternativeProductsData,
 } from "./sample_data"; 
 import { TranslationsProvider } from "@/contexts/TranslationsContext";
 
+
 const Home: React.FC = () => {
-  const [selectedProduct, setSelectedProduct] = useState<Product>(
-    combinedProducts[0]
-  );
   const [language, setLanguage] = useState<"en" | "fr">("en");
   const t = (key: string) =>
     (translations[language] as { [key: string]: string })[key] as string;
 
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  const similarProducts = products.slice(0, 3);
+  const alternativeProducts = products.slice(3, 6);
+
+  useEffect(() => {
+    const loadMockData = async () => {
+      const data = await mockProductData();
+      setProducts(data);
+      setSelectedProduct(data[0]);
+    };
+
+    loadMockData();
+  }, []);
+
   const updateSelectedProduct = (product: Product) => {
     setSelectedProduct(product);
   };
+
+  if (!selectedProduct) {
+    return <div>{t?.('loading')}</div>; // Loading state or placeholder
+  }
 
   return (
     <TranslationsProvider>
@@ -44,7 +58,7 @@ const Home: React.FC = () => {
       <main className="flex flex-col md:flex-row">
         <aside className="w-full md:w-3/12 p-4">
           <ChatBot
-            productData={combinedProducts}
+            productData={products}
             onProductSelect={updateSelectedProduct}
           />
           <button onClick={() => setLanguage(language === "en" ? "fr" : "en")}>
@@ -58,8 +72,8 @@ const Home: React.FC = () => {
 
         <aside className="w-full md:w-4/12 p-4">
           <RecommendedProducts
-            similarProducts={similarProductsData}
-            secondhandProducts={alternativeProductsData}
+            similarProducts={similarProducts}
+            alternativeProducts={alternativeProducts}
           />
         </aside>
       </main>

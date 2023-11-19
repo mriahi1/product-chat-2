@@ -1,9 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Product } from "@/types/Product";
-import { mockProductData } from "@/data/mockProductData";
 import { useTranslations } from '@/contexts/TranslationsContext';
-
 
 interface FeaturedProductProps {
   id: number;
@@ -21,64 +19,19 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
   const [useMockData, setUseMockData] = useState(true);
   const [product, setProduct] = useState<Product>({} as Product);
   const [selectedImage, setSelectedImage] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const translations = useTranslations();
   const t = translations?.t;
+
+  useEffect(() => {
+    // Update selected image when the images array changes
+    setSelectedImage(props?.images[0]);
+    setProduct(props);
+  }, [props]);
 
   const handleThumbnailClick = (image: string) => {
     setSelectedImage(image);
   };
-
-  useEffect(() => {
-    const getMockData = async () => {
-      const mockData = await mockProductData();
-      setProduct(mockData[0]);
-      setSelectedImage(mockData[0].images[0]);
-      setIsLoading(false);
-    };
-
-    getMockData();
-  }, []);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await fetch(
-          "https://your-api-endpoint.com/products/featured",
-          {
-            headers: {
-              Authorization: "Bearer YOUR_API_TOKEN",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data: Product = await response.json();
-        setProduct(data);
-        setSelectedImage(data.images[0]);
-      } catch (error) {
-        console.error("Error fetching product data:", error);
-        setProduct(product);
-        setSelectedImage(product.images[0]);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    setTimeout(() => {
-      if (!useMockData) {
-        fetchProduct();
-      }
-    }, 2000);
-
-  }, [useMockData]);
-
-  if (isLoading || !product || !product.images) {
-    return <div>{t?.('loading_product')}</div>;
-  }
 
   const {
     title,
@@ -89,7 +42,12 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
     distributor,
     countryOfOrigin,
     manufacturer,
-  } = product;
+  } = props;
+
+  if (!product || !product?.images) {
+    return <div>{t?.('loading_product')}</div>;
+  }
+
 
   const renderRating = (value: number, icon: string, color: { active: string, inactive: string }) => (
     <>

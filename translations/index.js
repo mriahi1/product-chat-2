@@ -8,6 +8,7 @@ const en = {
     chat_title: "What are you looking for today?",
     chat_loading: "Loading chat...",
     loading_products: "Loading products...",
+    loading_product: "Loading product...",
     distributor: "Distributor",
     product_details: "Product Details",
     country_of_origin: "Country of Origin",
@@ -17,6 +18,7 @@ const en = {
     secondhand_products: "Secondhand Products",
     visit_shop: "Visit Shop",
     about_this_item: "About this item",
+    toggle_data_source: "Toggle data source",
     // ... other translations
   };
 //   export default en;
@@ -31,6 +33,7 @@ const en = {
     chat_title: "Que cherchez-vous aujourd'hui?",
     chat_loading: "Chargement du chat...",
     loading_products: "Chargement des produits...",
+    loading_product: "Chargement du produit...",
     distributor: "Distributeur",
     product_details: "Détails du produit",
     country_of_origin: "Pays d'origine",
@@ -40,6 +43,7 @@ const en = {
     secondhand_products: "Produits d'occasion",
     visit_shop: "Visitez la boutique",
     about_this_item: "À propos de cet article",
+    toggle_data_source: "Basculer la source de données",
     // ... other translations
   };
 //   export default fr;
