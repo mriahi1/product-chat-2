@@ -4,18 +4,27 @@ import { useTranslation } from '@/contexts/TranslationsContext';
 
 
 interface RecommendedProductsProps {
-  similarProducts: Product[];
-  alternativeProducts: Product[];
-  onProductSelect: (product: Product) => void; // Add this line
+  products: Product[];
+  onProductSelect: (product: Product) => void;
 }
 
 
 const RecommendedProducts: React.FC<RecommendedProductsProps> = ({
-  similarProducts,
-  alternativeProducts,
+  products,
   onProductSelect,
 }) => {
   const { t } = useTranslation();
+
+  const getSimilarProducts = (products: Product[]): Product[] => {
+    return products.slice(0, 3);
+  };
+
+  const getAlternativeProducts = (products: Product[]): Product[] => {
+    return products.slice(3, 6);
+  };
+
+  const similarProducts = getSimilarProducts(products);
+  const alternativeProducts = getAlternativeProducts(products);
 
   return (
     <div className="space-y-6">

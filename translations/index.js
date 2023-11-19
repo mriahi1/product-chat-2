@@ -28,6 +28,14 @@ const en = {
     for_a_computer_monitor_less_than_200: "for a computer monitor less than $200",
     suggest_jewelry: "Suggest Jewelry",
     that_is_locally_sourced: "that is locally sourced",
+    sign_in: "Sign In",
+    sign_out: "Sign Out",
+    sign_up: "Sign Up",
+    email: "Email",
+    password: "Password",
+    profile: "Profile",
+    here_is_what_i_found: "Here is what I found",
+    nothing_found: "Nothing found",
   };
 //   export default en;
   
@@ -61,6 +69,14 @@ const en = {
     for_a_computer_monitor_less_than_200: "pour un moniteur d'ordinateur de moins de 200 €",
     suggest_jewelry: "Suggérer des bijoux",
     that_is_locally_sourced: "qui est d'origine locale",
+    sign_in: "Se connecter",
+    sign_out: "Déconnexion",
+    sign_up: "S'inscrire",
+    email: "Email",
+    password: "Mot de passe",
+    profile: "Profil",
+    here_is_what_i_found: "Voici ce que j'ai trouvé",
+    nothing_found: "Rien trouvé",
   };
 //   export default fr;
 

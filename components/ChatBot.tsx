@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { Product } from "@/types/Product";
 import { ChatMessage } from "@/types/ChatMessage";
 import { useTranslation } from "@/contexts/TranslationsContext";
+import { chatBotConfig } from '@/config';
 
 interface ChatBotProps {
   onProductSelect?: (product: Product) => void;
-  productData: Product[];
+  onProductsUpdate?: (products: Product[]) => void;
 }
 
-const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
+const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const [isBotThinking, setIsBotThinking] = useState(false);
@@ -21,7 +22,6 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
     { title: t('suggest_jewelry'), subtitle: t('that_is_locally_sourced')  },
     // ... add more suggestions as needed
   ];
-  
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -35,11 +35,25 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
     scrollToBottom();
   }, [messages.length]);
 
-  const getRecommendedProduct = (userInput: string): Product | undefined => {
+  const getRecommendedProduct = async (userInput: string) => {
     const lowerCaseUserInput = userInput.toLowerCase();
-    return productData.find((product) =>
+    let products;
+
+    let mockProductData = async () => {
+      return await import('@/data/mockProductData').then((module) => module.mockProductData());
+    }
+
+    products = await mockProductData();
+
+    const foundProduct = products.find((product) =>
       product.title.toLowerCase().includes(lowerCaseUserInput)
     );
+
+    return {
+      product: foundProduct,
+      products: products,
+      message: foundProduct ? `${t('here_is_what_i_found')}: ${foundProduct.title}` : t("nothing_found")
+    };
   };
 
   const sendMessage = (message: string) => {
@@ -53,15 +67,49 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
     setIsBotThinking(true);
   };
 
-  const performSearch = (searchTerm: string) => {
+  const fetchApiData = async (searchTerm: string) => {
+    try {
+      const response = await fetch(`${chatBotConfig.apiUrl}?query=${searchTerm}`);
+      if (!response.ok) {
+        throw new Error('API response not ok');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching from API:', error);
+      return null;
+    }
+  };
+  
+  const performSearch = async (searchTerm: string) => {
+    setIsBotThinking(true);
     sendMessage(searchTerm);
     setInputMessage("");
-    if (!isBotThinking) {
-      const recommendedProduct = getRecommendedProduct(searchTerm);
-      if (recommendedProduct && onProductSelect) {
-        onProductSelect(recommendedProduct);
-      }
+
+    let responseData: any;
+    if (chatBotConfig.useApi) {
+      responseData = await fetchApiData(searchTerm);
+    } else {
+      responseData = await getRecommendedProduct(searchTerm); 
     }
+  
+    setTimeout(() => {
+      if (responseData && responseData.product) {
+        const { product, products, message } = responseData;
+        onProductSelect && onProductSelect(product);
+        addBotMessage(message);
+        onProductsUpdate && onProductsUpdate(products); // Update product list
+      } else {
+        addBotMessage(responseData.message);
+      }
+      setIsBotThinking(false);
+    }, 800);
+  };
+
+  const addBotMessage = (message: string) => {
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { sender: "bot", content: message },
+    ]);
   };
 
   const handleSendMessage = () => {

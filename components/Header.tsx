@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = () => {
         
         <div className="flex items-center">
           <div className="profile cursor-pointer mr-4" onClick={handleProfileClick}>
-            <h1>{t("search_history")}</h1>
+            <h1>{t("profile")}</h1>
           </div>
 
           <select
@@ -44,9 +44,27 @@ const Header: React.FC<HeaderProps> = () => {
       {/* Signup Modal */}
       {showSignupModal && (
         <Modal onClose={() => setShowSignupModal(false)}>
-          <form>
-            <button type="submit">{t("signup")}</button>
-          </form>
+          <div className="text-center p-5">
+            <h2 className="mb-4">{t("sign_in_up")}</h2>
+            <form>
+              <input
+                type="email"
+                placeholder={t("email")}
+                className="block w-full p-2 mb-4 border rounded"
+              />
+              <input
+                type="password"
+                placeholder={t("password")}
+                className="block w-full p-2 mb-4 border rounded"
+              />
+              <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded mb-2">
+                {t("sign_in")}
+              </button>
+              {/* <button type="button" className="w-full bg-gray-500 text-white p-2 rounded">
+                {t("sign_up")}
+              </button> */}
+            </form>
+          </div>
         </Modal>
       )}
     </>
