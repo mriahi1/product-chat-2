@@ -20,7 +20,7 @@ const RecommendedProducts: React.FC<RecommendedProductsProps> = ({
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow p-4">
+      <div className="component p-4">
         <h2 className="text-lg font-semibold mb-4">{t?.('similar_products')}</h2>
         {similarProducts.map((product) => (
           <div 
@@ -39,7 +39,7 @@ const RecommendedProducts: React.FC<RecommendedProductsProps> = ({
         <button className="text-blue-600 py-2">{t?.('more')}</button>
       </div>
       
-      <div className="bg-white rounded-lg shadow p-4">
+      <div className="component p-4">
         <h2 className="text-lg font-semibold mb-4">{t?.('secondhand_alternatives')}</h2>
         {alternativeProducts.map((product) => (
           <div 

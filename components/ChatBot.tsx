@@ -88,7 +88,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, productData }) => {
   }, [isBotThinking]);
 
   return (
-    <div className="bg-white border border-gray-300 rounded-lg shadow-lg flex flex-col">
+    <div className="component flex flex-col">
       <div ref={chatContainerRef} className="overflow-y-auto p-3 space-y-2" style={{ height: 'calc(100vh - 350px)' }}>
         {messages.length === 0 && !isBotThinking ? (
           <>
