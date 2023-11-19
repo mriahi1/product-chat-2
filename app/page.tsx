@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Product } from "@/types/Product";
 import { mockProductData } from "@/data/mockProductData";
-
+import Modal from '@/components/Modal'; 
 import ChatBot from "@/components/ChatBot";
 import FeaturedProduct from "@/components/FeaturedProduct";
 import ProductPage from "@/components/ProductPage";
@@ -15,7 +15,10 @@ import { TranslationsProvider } from "@/contexts/TranslationsContext";
 
 
 const Home: React.FC = () => {
+  const [showOverlay, setShowOverlay] = useState<boolean>(true);
+  const [showSignupModal, setShowSignupModal] = useState<boolean>(false);
   const [language, setLanguage] = useState<"en" | "fr">("en");
+  const [inputMessage, setInputMessage] = useState<string>("");
   const t = (key: string) =>
     (translations[language] as { [key: string]: string })[key] as string;
 
@@ -28,6 +31,22 @@ const Home: React.FC = () => {
 
   const getAlternativeProducts = (products: Product[]): Product[] => {
     return products.slice(3, 6);
+  };
+
+  const handleOverlaySubmit = (searchTerm: string) => {
+    // Logic to handle the initial product search
+    setShowOverlay(false);
+    // Potentially trigger a search in the chatbot or elsewhere
+  };
+
+  const handleProfileClick = () => {
+    setShowSignupModal(true);
+  };
+
+  const handleSignupSubmit = (userData: any) => {
+    // Logic to handle user signup
+    setShowSignupModal(false);
+    // You might want to save userData or do something with it
   };
 
   const similarProducts = getSimilarProducts(products);
@@ -51,14 +70,67 @@ const Home: React.FC = () => {
     return <div>{t?.('loading')}</div>; // Loading state or placeholder
   }
 
+  const handleSearchSubmit = (event: React.FormEvent) => {
+    event.preventDefault(); // Prevent the default form submit action
+    // Assuming inputMessage is the state used for handling input value
+    const searchTerm = inputMessage.trim().toLowerCase();
+    const searchResults = products.filter((product) =>
+      product.title.toLowerCase().includes(searchTerm) ||
+      product.description.toLowerCase().includes(searchTerm)
+    );
+    // Handle the search logic, for example, updating state with the results
+    // or calling a function to display the results
+    // ...
+    setShowOverlay(false); // Close the overlay after search
+  };
+
   return (
     <TranslationsProvider>
+      {/* Overlay for initial search */}
+      {showOverlay && (
+      <div className="fixed inset-0 bg-gray-900 bg-opacity-95 flex justify-center items-center p-4">
+        <div className="w-full max-w-lg p-5 bg-gray-700 rounded-lg">
+          <h2 className="text-xl text-white mb-4">{t?.('searching_for_products')}</h2>
+          <form onSubmit={handleSearchSubmit} className="space-y-4">
+            <label htmlFor="searchInput" className="block text-sm font-medium text-gray-200">
+              {t?.('search_explainer')}
+            </label>
+            <input
+              id="searchInput"
+              type="text"
+              placeholder={t?.('search_placeholder')}
+              className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            >
+              {t?.('search')}
+            </button>
+          </form>
+        </div>
+      </div>
+    )}
+
+      {/* Signup Modal */}
+      {showSignupModal && (
+        <Modal onClose={() => setShowSignupModal(false)}>
+          {/* Replace with your signup form */}
+          <form>
+            {/* Form fields */}
+            <button type="submit">{t('signup')}</button>
+          </form>
+        </Modal>
+      )}
+
     <div className="container mx-auto my-8">
       <header className="flex justify-between items-center p-4 header">
         <div className="logo">
           <h1>{t("logo")}</h1>
         </div>
-        <div className="profile">
+       <div className="profile" onClick={handleProfileClick}>
           <h1>{t("search_history")}</h1>
         </div>
       </header>

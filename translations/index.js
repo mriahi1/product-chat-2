@@ -19,6 +19,8 @@ const en = {
     visit_shop: "Visit Shop",
     about_this_item: "About this item",
     toggle_data_source: "Toggle data source",
+    search_placeholder: "Search for products",
+    search: "Search",
     // ... other translations
   };
 //   export default en;
@@ -44,6 +46,8 @@ const en = {
     visit_shop: "Visitez la boutique",
     about_this_item: "À propos de cet article",
     toggle_data_source: "Basculer la source de données",
+    search_placeholder: "Rechercher des produits",
+    search: "Recherche",
     // ... other translations
   };
 //   export default fr;
