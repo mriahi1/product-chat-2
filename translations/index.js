@@ -36,6 +36,16 @@ const en = {
     profile: "Profile",
     here_is_what_i_found: "Here is what I found",
     nothing_found: "Nothing found",
+    no_alternatives: "No secondhand alternatives found",
+    start_over: "Start Over",
+    eco_chatbot_title: "Eco-Friendly Amazon Navigator",
+    eco_chatbot_purpose: "Our Eco-Friendly Amazon Navigator is designed to help you quickly and easily find environmentally responsible products on Amazon. This tool uses advanced chatbot technology to understand your needs and provide tailored product suggestions.",
+    how_to_use: "How to Use the Chatbot:",
+    start_conversation: "Simply type in what you're looking for, such as 'eco-friendly water bottles' or 'sustainable clothing.'",
+    be_specific: "The more details you provide, the better our chatbot can assist you. Feel free to mention specific features, brands, or certifications you're interested in.",
+    review_suggestions: "The chatbot will present a selection of products that match your criteria. You can ask for more details or different options if needed.",
+    get_additional_help: "If you're not sure what to look for, ask the chatbot for suggestions on popular eco-friendly products in any category.",
+    refine_search: "Use the feedback option to refine your search criteria. The chatbot learns from your preferences to provide better recommendations over time.",
   };
 //   export default en;
   
@@ -77,6 +87,16 @@ const en = {
     profile: "Profil",
     here_is_what_i_found: "Voici ce que j'ai trouvé",
     nothing_found: "Rien trouvé",
+    no_alternatives: "Aucune alternative d'occasion trouvée",
+    start_over: "Recommencer",
+    eco_chatbot_title: "Navigateur Amazon écologique",
+    eco_chatbot_purpose: "Notre navigateur Amazon écologique est conçu pour vous aider à trouver rapidement et facilement des produits écologiques sur Amazon. Cet outil utilise une technologie de chatbot avancée pour comprendre vos besoins et fournir des suggestions de produits adaptées.",
+    how_to_use: "Comment utiliser le chatbot:",
+    start_conversation: "Il vous suffit de taper ce que vous recherchez, comme 'gourdes écologiques' ou 'vêtements durables'.",
+    be_specific: "Plus vous fournissez de détails, mieux notre chatbot peut vous aider. N'hésitez pas à mentionner les fonctionnalités, marques ou certifications spécifiques qui vous intéressent.",
+    review_suggestions: "Le chatbot vous présentera une sélection de produits correspondant à vos critères. Vous pouvez demander plus de détails ou d'autres options si nécessaire.",
+    get_additional_help: "Si vous n'êtes pas sûr de ce que vous recherchez, demandez au chatbot des suggestions sur les produits écologiques populaires dans n'importe quelle catégorie.",
+    refine_search: "Utilisez l'option de commentaires pour affiner vos critères de recherche. Le chatbot apprend de vos préférences pour fournir de meilleures recommandations au fil du temps.",
   };
 //   export default fr;
 

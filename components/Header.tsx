@@ -22,7 +22,7 @@ const Header: React.FC<HeaderProps> = () => {
     <>
       <header className="flex justify-between items-center p-4">
         <div className="logo">
-          <h1>{t("logo")}</h1>
+          <h1>FETCHIZY</h1>
         </div>
         
         <div className="flex items-center">

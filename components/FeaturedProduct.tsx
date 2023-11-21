@@ -125,7 +125,7 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
             <div className="flex justify-between items-center w-full">
               {renderRating(product.rating, '★', { active: 'text-yellow-500', inactive: 'text-gray-300' })}
               
-              {renderRating(product.rating, '+', { active: 'text-green-500', inactive: 'text-gray-300' })}
+              {/* {renderRating(product.rating, '+', { active: 'text-green-500', inactive: 'text-gray-300' })} */}
               {/* {renderRating("eco")} */}
               {renderCTA(product.url)}
               

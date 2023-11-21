@@ -6,6 +6,7 @@ import FeaturedProduct from "@/components/FeaturedProduct";
 import RecommendedProducts from "@/components/RecommendedProducts";
 import Header from "@/components/Header";
 import { TranslationProvider } from "@/contexts/TranslationsContext";
+import GettingStarted from "@/components/GettingStarted";
 
 const Home: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -60,6 +61,10 @@ const Home: React.FC = () => {
                   onProductsUpdate={updateProducts}
 
                 />
+              
+              </aside>
+              <aside className="w-full md:w-3/12 p-4">
+                <GettingStarted />
               
               </aside>
             </>

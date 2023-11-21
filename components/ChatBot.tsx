@@ -31,6 +31,14 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
     }
   };
 
+  const handleResetProductSelect = () => {
+    if (onProductSelect) {
+      setMessages([]);
+      onProductSelect(null);
+    }
+  };
+
+
   useEffect(() => {
     scrollToBottom();
   }, [messages.length]);
@@ -131,10 +139,10 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
         addBotMessage(message);
         onProductsUpdate && onProductsUpdate(products); // Update product list
       } else {
-        addBotMessage(responseData.message);
+        addBotMessage(message);
       }
       setIsBotThinking(false);
-    }, 800);
+    }, 1500);
   };
 
   const addBotMessage = (message: string) => {
@@ -162,7 +170,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
     if (isBotThinking) {
       const timer = setTimeout(() => {
         setIsBotThinking(false);
-      }, 800);
+      }, 2000);
 
       return () => clearTimeout(timer);
     }
@@ -214,7 +222,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="border-t border-gray-300 p-2 flex items-center space-x-2 bg-white">
+      <div className="border-t border-gray-300 p-2 flex items-center space-x-2">
         <input
           type="text"
           placeholder={t('message_placeholder')}
@@ -241,8 +249,15 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
         </button>
       </div>
     </div>
+    <button
+      onClick={handleResetProductSelect}
+      className="flex-none text-gray-500 p-2 focus:outline-none"
+    >
+      {t?.('start_over')}
+    </button>
   </>
   );
 };
 
 export default ChatBot;
+

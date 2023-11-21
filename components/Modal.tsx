@@ -42,8 +42,14 @@ const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
       }}
     >
       <div 
-        className="relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-md shadow-lg" 
-        style={{ width: '20%' }}
+        className="relative p-6 rounded-md shadow-lg bg-white"
+        style={{ 
+          top: '50%', 
+          left: '50%', 
+          transform: 'translate(-50%, -50%)',
+          width: '90%', // Adjust width for mobile
+          maxWidth: '500px' // Max width for larger screens
+        }}
       >
         <button onClick={onClose} className="absolute top-0 right-0 mt-4 mr-4">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
