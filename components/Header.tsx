@@ -35,8 +35,8 @@ const Header: React.FC<HeaderProps> = () => {
             onChange={handleLanguageChange}
             className="appearance-none bg-transparent border-b border-gray-300 hover:border-blue-500 focus:border-blue-500 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
           >
-            <option value="en">🇬🇧 English</option>
-            <option value="fr">🇫🇷 French</option>
+            <option value="en">🇬🇧 EN</option>
+            <option value="fr">🇫🇷 FR</option>
           </select>
         </div>
       </header>
