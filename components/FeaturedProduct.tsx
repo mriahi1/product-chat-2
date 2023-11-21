@@ -8,6 +8,7 @@ interface FeaturedProductProps {
   title: string;
   images: string[];
   rating: number;
+  url: string;
   description: string;
   price: number;
   distributor: string;
@@ -16,7 +17,6 @@ interface FeaturedProductProps {
 }
 
 const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
-  const [useMockData, setUseMockData] = useState(true);
   const [product, setProduct] = useState<Product>({} as Product);
   const [selectedImage, setSelectedImage] = useState<string>("");
   const { t } = useTranslation();
@@ -34,6 +34,7 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
   const {
     title,
     rating,
+    url,
     price,
     description,
     images,
@@ -45,7 +46,6 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
   if (!product || !product?.images) {
     return <div>{t?.('loading_product')}</div>;
   }
-
 
   const renderRating = (value: number, icon: string, color: { active: string, inactive: string }) => (
     <>
@@ -70,11 +70,11 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
   );
   
 
-  const renderCTA = () => (
+  const renderCTA = (url: string) => (
     <div className="flex justify-between items-center w-full">
       <button
         className="bg-blue-500 text-white px-6 py-2 rounded-full focus:outline-none hover:bg-blue-600 transition duration-300 ease-in-out"
-        onClick={() => window.open("https://www.amazon.com", "_blank")}
+        onClick={() => window.open(url, "_blank")}
       >
         {t?.('visit_shop')}
       </button>
@@ -127,7 +127,7 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
               
               {renderRating(product.rating, '+', { active: 'text-green-500', inactive: 'text-gray-300' })}
               {/* {renderRating("eco")} */}
-              {renderCTA()}
+              {renderCTA(product.url)}
               
             </div>
             <hr className="border-t border-gray-300 my-2" />

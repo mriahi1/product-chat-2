@@ -5,6 +5,7 @@ export interface Product {
     description: string;
     images: string[];
     price: number;
+    url: string;
     rating: number;
     distributor: string;
     countryOfOrigin: string;

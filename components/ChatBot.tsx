@@ -69,7 +69,14 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
 
   const fetchApiData = async (searchTerm: string) => {
     try {
-      const response = await fetch(`${chatBotConfig.apiUrl}?query=${searchTerm}`);
+      const response = await fetch(`/api/recommendations`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: searchTerm }),
+      });
+  
       if (!response.ok) {
         throw new Error('API response not ok');
       }
@@ -85,16 +92,41 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
     sendMessage(searchTerm);
     setInputMessage("");
 
+    let product: any;
+    let products: any;
+    let message: any;
+
     let responseData: any;
     if (chatBotConfig.useApi) {
       responseData = await fetchApiData(searchTerm);
+      if (responseData.recommendation.length !== 0) {
+        // Convert API response to Product array
+        const recommendations: Product[] = responseData.recommendation.map((p: any) => ({
+          id: parseInt(p.id, 10), 
+          title: p.title,
+          description: p.description,
+          images: [p.image],
+          price: p.price,
+          url: p.url,
+          rating: p.rating,
+          distributor: p.distributor,
+          countryOfOrigin: p.country_of_origin,
+          manufacturer: p.manufacturer
+        }));
+        products = recommendations
+        product = recommendations[0]
+      }
+
+      message = product ? `${t('here_is_what_i_found')}: ${product.title}` : t("nothing_found")
     } else {
       responseData = await getRecommendedProduct(searchTerm); 
+      product = responseData.product
+      products = responseData.products
+      message = responseData.message
     }
   
     setTimeout(() => {
-      if (responseData && responseData.product) {
-        const { product, products, message } = responseData;
+      if (responseData) {
         onProductSelect && onProductSelect(product);
         addBotMessage(message);
         onProductsUpdate && onProductsUpdate(products); // Update product list

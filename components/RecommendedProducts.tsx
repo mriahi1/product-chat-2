@@ -36,7 +36,7 @@ const RecommendedProducts: React.FC<RecommendedProductsProps> = ({
             className="flex items-center justify-between border-b border-gray-200 py-3"
             onClick={() => onProductSelect(product)}
           >
-            <img src={product.images[0]} alt="" className="w-12 h-12 bg-gray-200 rounded" />
+            <img src={product?.images[0]} alt="" className="w-12 h-12 bg-gray-200 rounded" />
             <div className="flex-grow px-4">
               <div className="font-semibold">{product.title}</div>
               <div className="text-yellow-400">{product.rating} ★</div>
@@ -55,7 +55,7 @@ const RecommendedProducts: React.FC<RecommendedProductsProps> = ({
             className="flex items-center justify-between border-b border-gray-200 py-3"
             onClick={() => onProductSelect(product)}
           >
-            <img src={product.images[Math.floor(Math.random() * 3)]} alt="" className="w-12 h-12 bg-gray-200 rounded" />
+            <img src={product?.images[Math.floor(Math.random() * 3)]} alt="" className="w-12 h-12 bg-gray-200 rounded" />
             <div className="flex-grow px-4">
               <div className="font-semibold">{product.title}</div>
               <div className="text-yellow-400">{product.rating} ★</div>
