@@ -18,7 +18,7 @@ export default async function handler(
     body: JSON.stringify(req.body),
   });
 
-  console.log("externalApiResponse", externalApiResponse)
+  // console.log("externalApiResponse", externalApiResponse)
 
   if (!externalApiResponse.ok) {
     const errorDetails = await externalApiResponse.json(); // Assuming the response is in JSON format
