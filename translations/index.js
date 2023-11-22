@@ -75,7 +75,7 @@ const en = {
     message_placeholder: "Tapez votre message ici...",
     find_me: "Trouve moi",
     for_my_dog: "de la bonne pâtée pour chien",
-    find_a_deal: "Trouver une bonne affaire",
+    find_a_deal: "Cherche une bonne affaire",
     for_iphone_earphones: "pour des écouteurs d'Iphone",
     i_need: "J'ai besoin",
     an_iphone_charger: "d'un chargeur d'Iphone",
