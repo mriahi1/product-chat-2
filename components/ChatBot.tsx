@@ -19,7 +19,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
   const suggestions = [
     { title: t("find_me"), subtitle: t('for_my_dog') },
     { title: t('find_a_deal'), subtitle: t('for_iphone_earphones') },
-    { title: t('I_need'), subtitle: t('an_iphone_charger')  },
+    { title: t('i_need'), subtitle: t('an_iphone_charger')  },
     // ... add more suggestions as needed
   ];
 
