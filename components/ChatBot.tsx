@@ -17,9 +17,9 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
   const { t } = useTranslation();
 
   const suggestions = [
-    { title: t("gift_ideas"), subtitle: t('for_my_mother') },
-    { title: t('find_a_deal'), subtitle: t('for_a_computer_monitor_less_than_200') },
-    { title: t('suggest_jewelry'), subtitle: t('that_is_locally_sourced')  },
+    { title: t("find_me"), subtitle: t('for_my_dog') },
+    { title: t('find_a_deal'), subtitle: t('for_iphone_earphones') },
+    { title: t('I need'), subtitle: t('an_iphone_charger')  },
     // ... add more suggestions as needed
   ];
 
