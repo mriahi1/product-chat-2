@@ -11,6 +11,8 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: #e5e7eb;
   color: #1f2937;
+  height: 100%;
+  display: flex;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -72,10 +74,14 @@ button {
   border-radius: 8px !important;
 }
 
+main {
+  flex: 1;
+}
+
 
 footer {
   /* background-color: #f3f4f6; */
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
   padding-right: 50px;
