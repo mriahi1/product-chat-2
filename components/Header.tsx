@@ -26,9 +26,9 @@ const Header: React.FC<HeaderProps> = () => {
         </div>
         
         <div className="flex items-center">
-          <div className="profile cursor-pointer mr-4" onClick={handleProfileClick}>
+          {/*<div className="profile cursor-pointer mr-4" onClick={handleProfileClick}>
             <h1>{t("profile")}</h1>
-          </div>
+          </div>*/}
 
           <select
             value={language}
