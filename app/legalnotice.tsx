@@ -10,4 +10,4 @@ const MentionsLegales: React.FC = () => {
   );
 }
 
-export default MentionsLegales;
+export default MentionsLegales
