@@ -108,7 +108,7 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
               <img
                 src={img}
                 alt={`Thumbnail ${index + 1}`}
-                className="w-full h-full object-cover rounded"
+                className="w-full h-full max-h-400 object-cover rounded"
               />
             </button>
           ))}
