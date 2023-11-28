@@ -25,7 +25,7 @@ const RecommendedProducts: React.FC<RecommendedProductsProps> = ({
 
   const similarProducts = getSimilarProducts(products);
   // const alternativeProducts = getAlternativeProducts(products);
-  const alternativeProducts = []
+  // const alternativeProducts = []
 
   return (
     <div className="space-y-6">
@@ -48,7 +48,7 @@ const RecommendedProducts: React.FC<RecommendedProductsProps> = ({
         <button className="text-blue-600 py-2">{t?.('more')}</button>
       </div>
       
-      {alternativeProducts && (
+      {/* {alternativeProducts && (
       <div className="component p-4">
         <h2 className="text-lg font-semibold mb-4">{t?.('secondhand_alternatives')}</h2>
         {alternativeProducts.map((product) => (
@@ -69,7 +69,7 @@ const RecommendedProducts: React.FC<RecommendedProductsProps> = ({
           <div className="text-center text-gray-500 py-4">{t?.('no_alternatives')}</div>
         )}
       </div>
-      )}
+      )} */}
     </div>
   );
 };
