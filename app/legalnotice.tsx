@@ -1,5 +1,5 @@
-import React from 'react',
-import { useTranslation } from "@/contexts/TranslationsContext",
+import React from 'react'
+import { useTranslation } from "@/contexts/TranslationsContext"
 
 const MentionsLegales: React.FC = () => {
   return (
