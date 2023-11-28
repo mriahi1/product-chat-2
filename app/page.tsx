@@ -7,6 +7,7 @@ import RecommendedProducts from "@/components/RecommendedProducts";
 import Header from "@/components/Header";
 import { TranslationProvider } from "@/contexts/TranslationsContext";
 import GettingStarted from "@/components/GettingStarted";
+import LegalNotice from "@/components/LegalNotice";
 
 const Home: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -80,7 +81,9 @@ const Home: React.FC = () => {
         </aside> */}
         </main>
 
-        <footer className="p-4">{/* Footer content here */}</footer>
+        <footer>
+          <LegalNotice />
+        </footer>
       </div>
     </TranslationProvider>
   );

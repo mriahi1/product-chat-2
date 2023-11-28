@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "@/components/Modal";
 import { useTranslation } from "@/contexts/TranslationsContext";
+import Link from 'next/link';
 
 interface HeaderProps {
     // Define any props here if needed
@@ -22,7 +23,9 @@ const Header: React.FC<HeaderProps> = () => {
     <>
       <header className="flex justify-between items-center p-4">
         <div className="logo">
-          <h1>FETCHIZY <small>beta</small></h1>
+          <Link href="/">
+            <h1>FETCHIZY <small>beta</small></h1>
+          </Link>
         </div>
         
         <div className="flex items-center">
