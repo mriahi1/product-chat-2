@@ -190,7 +190,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
             {suggestions.map((suggestion, index) => (
               <button
                 key={index}
-                onClick={() => handleSuggestionClick(suggestion.title)}
+                onClick={() => handleSuggestionClick(suggestion.title + " " + suggestion.subtitle)}
                 className="text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 transition ease-in-out duration-150 w-full text-left"
               >
                 {suggestion.title}
