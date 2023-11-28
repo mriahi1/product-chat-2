@@ -24,7 +24,8 @@ const RecommendedProducts: React.FC<RecommendedProductsProps> = ({
   };
 
   const similarProducts = getSimilarProducts(products);
-  const alternativeProducts = getAlternativeProducts(products);
+  // const alternativeProducts = getAlternativeProducts(products);
+  const alternativeProducts = []
 
   return (
     <div className="space-y-6">
