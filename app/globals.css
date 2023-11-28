@@ -84,9 +84,12 @@ footer {
   position: relative;
   bottom: 0;
   width: 100%;
-  padding-right: 50px;
   /* margin-right: -20px; */
   /* text-align: right; Text aligned to the right */
+}
+
+footer > div {
+  padding-right: 50px;
 }
 
 footer a {
