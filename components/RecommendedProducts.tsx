@@ -42,7 +42,7 @@ const RecommendedProducts: React.FC<RecommendedProductsProps> = ({
               <div className="font-semibold">{product.title}</div>
               <div className="text-yellow-400">{product.rating} ★</div>
             </div>
-            <div className="font-semibold">${product.price}</div>
+            <div className="font-semibold">€{product.price}</div>
           </div>
         ))}
         <button className="text-blue-600 py-2">{t?.('more')}</button>
