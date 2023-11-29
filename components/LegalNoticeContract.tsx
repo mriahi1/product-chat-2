@@ -16,12 +16,4 @@ const MentionsLegales: React.FC = () => {
     </React.Fragment>
   ));
 
-  return (
-    <div>
-      <h1>{t?.('legal_mention')}</h1>
-      {formattedText}
-    </div>
-  );
-};
-
 export default MentionsLegales;
