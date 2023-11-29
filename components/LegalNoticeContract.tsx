@@ -16,4 +16,3 @@ const MentionsLegales: React.FC = () => {
     </React.Fragment>
   ));
 
-export default MentionsLegales;
