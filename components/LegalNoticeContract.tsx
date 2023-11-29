@@ -18,7 +18,7 @@ const MentionsLegales: React.FC = () => {
 
   return (
     <div>
-      <h1>{t?.('legal_mention')}</h1>
+      <h1><strong>{t?.('legal_mention')}</strong></h1>
       {formattedText}
     </div>
   );
