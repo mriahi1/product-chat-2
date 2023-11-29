@@ -6,18 +6,20 @@ const MentionsLegales: React.FC = () => {
 
   const legalMentionsText = t?.('legal_mention_contract');
 
-  // Remplacer les ** par des balises <strong>
-  const formattedText = legalMentionsText?.split('**').map((segment, index) => (
-    index % 2 === 0 ? segment : <strong key={index}>{segment}</strong>
+  // Remplacer les ** par des balises <strong> et les \n par des balises <br>
+  const formattedText = legalMentionsText?.split('\n').map((line, index) => (
+    <React.Fragment key={index}>
+      {line.split('**').map((segment, subIndex) => (
+        subIndex % 2 === 0 ? segment : <strong key={subIndex}>{segment}</strong>
+      ))}
+      <br />
+    </React.Fragment>
   ));
-
-  // Remplacer les \n par des balises <br>
-  const textWithLineBreaks = formattedText?.join('\n');
 
   return (
     <div>
       <h1>{t?.('legal_mention')}</h1>
-      <p style={{ whiteSpace: 'pre-line' }}>{textWithLineBreaks}</p>
+      {formattedText}
     </div>
   );
 };
