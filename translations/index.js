@@ -49,7 +49,7 @@ const en = {
     legal_mention: "Legal Notice",
     legal_mention_contract: "In accordance with the provisions of French Law No. 2004-575 of June 21, 2004, concerning trust in the digital economy, users of the Fetchizy website are hereby informed of the identity of the various parties involved in its creation and monitoring.\n\n\n**Website Editing**\nThis website, accessible at the URL https://www.fetchizy.com/ (the 'Site'), is edited by:\nBastien Jeauffroy, residing at 12 avenue de Wagram, 75017 PARIS, of French nationality (France), born on 10/09/1991.\n\n\n**Hosting**\nThe Site is hosted by the company Vercel, located at 440 N Barranca Ave #4133, Covina, CA 91723, USA (email: privacy@vercel.com).\n\n\n**Publication Director**\nThe Publication Director of the Site is Bastien Jeauffroy.\n\n\n**Contact Us**\nBy email: girijo.sas@gmail.com",
     affiliation_mention: "Affiliate Statement",
-    affiliation_mention_contract: "\nAs an Amazon Associate, this website earn from qualifying purchases.",
+    affiliation_mention_contract: "As an Amazon Associate, this website earn from qualifying purchases.",
   };
 //   export default en;
   
@@ -104,7 +104,7 @@ const en = {
     legal_mention: "Mentions légales",
     legal_mention_contract: "Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour la confiance en l'économie numérique, il est précisé aux utilisateurs du site Fetchizy l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.\n\n\n**Edition du site**\nLe présent site, accessible à l’URL https://www.fetchizy.com/ (le « Site »), est édité par :\n\nBastien Jeauffroy, résidant 12 avenue de Wagram 75017 PARIS, de nationalité Française (France), né(e) le 10/09/1991, \n\n\n**Hébergement**\nLe Site est hébergé par la société Vercel, située 440 N Barranca Ave #4133, Covina, CA 91723, USA, (contact email : privacy@vercel.com).\n\n\n**Directeur de publication**\nLe Directeur de la publication du Site est Bastien Jeauffroy.\n\n\n**Nous contacter**\n\nPar email : girijo.sas@gmail.com",
     affiliation_mention: "Déclaration d'affiliation",
-    affiliation_mention_contract: "\nEn tant que Partenaire Amazon, ce site réalise un bénéfice sur les achats remplissant les conditions requises.",
+    affiliation_mention_contract: "En tant que Partenaire Amazon, ce site réalise un bénéfice sur les achats remplissant les conditions requises.",
   };
 //   export default fr;
 
