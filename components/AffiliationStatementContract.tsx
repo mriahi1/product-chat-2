@@ -6,9 +6,9 @@ const AffiliationStatement: React.FC = () => {
   
   return (
     <div>
-      <h1>{t?.('affiliation_mention')}</h1>
+      <h1><strong>{t?.('affiliation_mention')}</strong></h1>
       <p>
-      {t?.('affiliation_mention_contract')}
+        {t?.('affiliation_mention_contract')}
       </p>
     </div>
   )
