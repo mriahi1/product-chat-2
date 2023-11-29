@@ -21,9 +21,6 @@ const Legal: NextPage = () => {
          <LegalNoticeContract />
         </main>
 
-        <footer>
-          <LegalNotice />
-        </footer>
       </div>
     </TranslationProvider>
   );
