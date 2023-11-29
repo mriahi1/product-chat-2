@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import { TranslationProvider } from "@/contexts/TranslationsContext";
 import GettingStarted from "@/components/GettingStarted";
 import LegalNotice from "@/components/LegalNotice";
+import AffiliationStatement from '@/components/AffiliationStatement';
 
 const Home: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -83,6 +84,7 @@ const Home: React.FC = () => {
 
         <footer>
           <LegalNotice />
+          <AffiliationStatement />
         </footer>
       </div>
     </TranslationProvider>
