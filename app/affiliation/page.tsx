@@ -21,9 +21,6 @@ const Affiliation: NextPage = () => {
          <AffiliationStatementContract />
         </main>
 
-        <footer>
-          <AffiliationStatement />
-        </footer>
       </div>
     </TranslationProvider>
   );
