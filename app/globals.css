@@ -135,8 +135,7 @@ footer a {
   }
 }
 
-
-
+@media (min-width: 768px) {
 .chat-with-products {
   max-width: 350px;
   --space-y-value: 0.5rem; /* This corresponds to 'space-y-2' which is typically 0.5rem */
@@ -152,4 +151,5 @@ footer a {
 
 .chat-with-products > *:not(:last-child) {
   margin-bottom: var(--space-y-value);
+}
 }
