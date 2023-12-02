@@ -28,7 +28,7 @@ const RecommendedProducts: React.FC<RecommendedProductsProps> = ({
   // const alternativeProducts = []
 
   return (
-    <div className="space-y-6">
+    <div className="recommended-products space-y-6 fixed flex-col space-y-2 top-20 right-20 z-10">
       <div className="component p-4">
         <h2 className="text-lg font-semibold mb-4">{t?.('similar_products')}</h2>
         {similarProducts.map((product) => (
