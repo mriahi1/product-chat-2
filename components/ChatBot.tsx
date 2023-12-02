@@ -178,7 +178,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
 
   return (
     <>
-    <div className={`chat-container component flex flex-col p-3 ${messages.length > 0 ? 'chat-with-products' : ''}`}>
+    <div className={`chat-container component flex flex-col p-3 ${messages?.length > 0 ? 'chat-with-products' : ''}`}>
       <div
         ref={chatContainerRef}
         className="overflow-y-auto p-3 space-y-2"
