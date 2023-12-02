@@ -2,13 +2,15 @@
 import React, { useState } from "react";
 import { Product } from "@/types/Product";
 import ChatBot from "@/components/ChatBot";
-import FeaturedProduct from "@/components/FeaturedProduct";
+// import FeaturedProduct from "@/components/FeaturedProduct";
+import ProductFeed from "@/components/ProductFeed";
 import RecommendedProducts from "@/components/RecommendedProducts";
 import Header from "@/components/Header";
 import { TranslationProvider } from "@/contexts/TranslationsContext";
 import GettingStarted from "@/components/GettingStarted";
 import LegalNotice from "@/components/LegalNotice";
 import AffiliationStatement from '@/components/AffiliationStatement';
+
 
 const Home: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -34,9 +36,9 @@ const Home: React.FC = () => {
             selectedProduct ? "" : "justify-center"
           }`}
         >
-          {selectedProduct ? (
+          {products && products.length > 0 ? (
             <>
-              <aside className="w-full md:w-3/12 p-4 h-full">
+              <aside className="w-full md:w-3/12 h-full">
                 <ChatBot
                   onProductSelect={updateSelectedProduct}
                   onProductsUpdate={updateProducts}
@@ -44,16 +46,19 @@ const Home: React.FC = () => {
                 
               </aside>
 
-              <section className="w-full md:w-5/12 p-4">
-                <FeaturedProduct {...selectedProduct} />
+              <section className="w-full md:w-5/12">
+                {/* <FeaturedProduct {...selectedProduct} /> */}
+                <ProductFeed products={products} />
               </section>
 
-              <aside className="w-full md:w-4/12 p-4">
+              {/* {products && products.length > 0 && (
+              <aside className="w-full md:w-3/12 p-4">
                 <RecommendedProducts
                   products={products}
                   onProductSelect={updateSelectedProduct}
                 />
               </aside>
+              )} */}
             </>
           ) : (
             <>

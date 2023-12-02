@@ -105,7 +105,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
     let message: any;
 
     let responseData: any;
-    if (chatBotConfig.useApi) {
+    if (false && chatBotConfig.useApi) {
       responseData = await fetchApiData(searchTerm);
       if (responseData.recommendation.length !== 0) {
         // Convert API response to Product array
@@ -178,7 +178,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
 
   return (
     <>
-    <div className="component flex flex-col">
+    <div className={`chat-container component flex flex-col p-3 ${messages.length > 0 ? 'chat-with-products' : ''}`}>
       <div
         ref={chatContainerRef}
         className="overflow-y-auto p-3 space-y-2"
@@ -248,13 +248,14 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
           </svg>
         </button>
       </div>
+      <button
+        onClick={handleResetProductSelect}
+        className="flex-none text-gray-500 p-2 focus:outline-none"
+      >
+        {t?.('start_over')}
+      </button>
     </div>
-    <button
-      onClick={handleResetProductSelect}
-      className="flex-none text-gray-500 p-2 focus:outline-none"
-    >
-      {t?.('start_over')}
-    </button>
+    
   </>
   );
 };
