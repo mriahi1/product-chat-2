@@ -105,7 +105,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
     let message: any;
 
     let responseData: any;
-    if (false && chatBotConfig.useApi) {
+    if (chatBotConfig.useApi) {
       responseData = await fetchApiData(searchTerm);
       if (responseData.recommendation.length !== 0) {
         // Convert API response to Product array
