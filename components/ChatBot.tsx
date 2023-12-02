@@ -32,8 +32,10 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
   };
 
   const handleResetProductSelect = () => {
-    if (onProductSelect) {
+    if (onProductsUpdate) {
       setMessages([]);
+      onProductsUpdate([])
+      // onProductSelect([]);
       // onProductSelect();
     }
   };

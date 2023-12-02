@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "@/contexts/TranslationsContext";
 import Link from "next/link";
-import CookieConsent from "react-cookie-consent";
+// import CookieConsent from "react-cookie-consent";
 
 const MentionsLegales: React.FC = () => {
   const { t } = useTranslation();
@@ -10,9 +10,9 @@ const MentionsLegales: React.FC = () => {
       <div>
         <Link href="/legal">{t?.("legal_mention")}</Link>
       </div>
-      <CookieConsent>
+      {/* <CookieConsent>
         {t?.("cookie_notice")}
-      </CookieConsent>
+      </CookieConsent> */}
     </>
   );
 };
