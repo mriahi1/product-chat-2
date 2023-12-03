@@ -6,7 +6,7 @@
 - add design
 - same widths of products and chat on mobile
 - move chat to bottom on mobile
-
+- mobile version landscape mode is broken
 
 
 - add category recommendations
