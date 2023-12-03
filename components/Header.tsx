@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = () => {
 
   return (
     <>
-      <header className="top-0 left-0 right-0 z-10 flex justify-between items-center p-4 bg-white shadow-md">
+      <header className="fixed top-0 left-0 right-0 z-10 flex justify-between items-center p-4 bg-white shadow-md">
         <div className="logo">
           <Link href="/">
             <h1>FETCHIZY <small>beta</small></h1>

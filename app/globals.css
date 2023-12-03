@@ -77,7 +77,7 @@ button {
 
 main {
   flex: 1;
-  /* margin-top: 60px; */
+  margin-top: 60px;
   /* padding-bottom: 4rem; */
 }
 
@@ -100,6 +100,14 @@ footer > div {
 footer a {
   color: darkslategrey;
   text-decoration: none;
+}
+/* 
+.product-feed {
+  margin-top: 20px
+} */
+
+.featured-product-container {
+  margin-top: 20px;
 }
 
 @media (max-width: 768px) { /* or whatever breakpoint you want for mobile devices */
