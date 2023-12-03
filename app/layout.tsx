@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 
 export const metadata: Metadata = {
-  title: 'AI-powered personal shopper',
+  title: 'Fetchizy - Smart Shopping Companion',
   description: 'Find better products faster',
 }
 
