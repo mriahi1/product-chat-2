@@ -4,4 +4,9 @@
 - make chat interactive
 - harmonize product image sizes (and fix eslint warnings)
 - add design
-- 
+- same widths of products and chat on mobile
+- move chat to bottom on mobile
+
+
+
+- add category recommendations
