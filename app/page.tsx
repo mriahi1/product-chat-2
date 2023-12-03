@@ -32,7 +32,7 @@ const Home: React.FC = () => {
         <Header />
 
         <main
-          className={`flex flex-col md:flex-row ${
+          className={`page-section flex flex-col md:flex-row ${
             selectedProduct ? "" : "justify-center"
           }`}
         >
@@ -76,15 +76,6 @@ const Home: React.FC = () => {
               </aside>
             </>
           )}
-        </main>
-
-        <main className="flex flex-col md:flex-row">
-          {/* <aside className="w-full md:w-6/12 p-4">
-          <ProductsList />
-        </aside> */}
-          {/* <aside className="w-full md:w-6/12 p-4">
-          <ProductPage />
-        </aside> */}
         </main>
 
         <footer>
