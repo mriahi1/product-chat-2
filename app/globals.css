@@ -97,6 +97,11 @@ footer > div {
   padding-right: 50px;
 }
 
+.footer-link {
+  display: inline-block;
+  margin-right: 10px;
+}
+
 footer a {
   color: darkslategrey;
   text-decoration: none;
