@@ -79,8 +79,12 @@ const Home: React.FC = () => {
         </main>
 
         <footer>
-          <LegalNotice />
-          <AffiliationStatement />
+  <div className="footer-link">
+    <LegalNotice />
+  </div>
+  <div className="footer-link">
+    <AffiliationStatement />
+  </div>
         </footer>
       </div>
     </TranslationProvider>
