@@ -84,19 +84,13 @@ main {
 
 footer {
   /* background-color: #f3f4f6; */
-  /* position: fixed; */
-  bottom: 0;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center; /* Centrer horizontalement */
+  align-items: flex-end; /* Aligner en bas */
+  color: white;
+  height: 80px; /* Ajustez la hauteur selon vos besoins */
   width: 100%;
-  padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  /* text-align: center; */
-  /* margin-right: -20px; */
-  /* text-align: right; Text aligned to the right */
-}
-
-footer > div {
-  padding-right: 50px;
 }
 
 .footer-link {
