@@ -84,13 +84,20 @@ main {
 
 footer {
   /* background-color: #f3f4f6; */
-  padding: 1rem 2rem;
+   padding: 1rem 2rem;
   display: flex;
-  justify-content: center; /* Centrer horizontalement */
-  align-items: flex-end; /* Aligner en bas */
+  justify-content: center;
+  align-items: flex-end;
   color: white;
-  height: 80px; /* Ajustez la hauteur selon vos besoins */
+  height: 80px; /* Adjust the height as needed */
   width: 100%;
+  flex-wrap: nowrap; /* Prevent wrapping on narrow screens */
+
+  /* Styles for narrow screens (e.g., mobile devices) */
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack elements vertically for narrow screens */
+    align-items: center; /* Center elements horizontally */
+  }
 }
 
 .footer-link {
