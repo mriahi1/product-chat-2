@@ -2,10 +2,10 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Header from '@/components/Header';
-import AffiliationStatementContract from '@/components/AffiliationStatementContract';
-import { TranslationProvider } from '@/contexts/TranslationsContext';
 import LegalNotice from '@/components/LegalNotice';
-import AffiliationStatement from '@/components/AffiliationStatement'; 
+import AffiliationStatement from '@/components/AffiliationStatement';
+import LegalNoticeContract from '@/components/LegalNoticeContract';
+import { TranslationProvider } from '@/contexts/TranslationsContext';
 
 const Affiliation: NextPage = () => {
   return (
