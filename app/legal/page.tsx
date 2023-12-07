@@ -2,6 +2,8 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Header from '@/components/Header';
+import LegalNotice from '@/components/LegalNotice';  // Ajout de cet import
+import AffiliationStatement from '@/components/AffiliationStatement';  // Ajout de cet import
 import LegalNoticeContract from '@/components/LegalNoticeContract';
 import { TranslationProvider } from '@/contexts/TranslationsContext';
 
