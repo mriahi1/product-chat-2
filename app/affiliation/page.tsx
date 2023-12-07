@@ -13,6 +13,14 @@ const Affiliation: NextPage = () => {
         <main className={`flex flex-col md:flex-row`}>
           <AffiliationStatementContract />
         </main>
+         <footer>
+  <div className="footer-link">
+    <LegalNotice />
+  </div>
+  <div className="footer-link">
+    <AffiliationStatement />
+  </div>
+        </footer>
       </div>
     </TranslationProvider>
   );
