@@ -4,6 +4,8 @@ import type { NextPage } from 'next';
 import Header from '@/components/Header';
 import AffiliationStatementContract from '@/components/AffiliationStatementContract';
 import { TranslationProvider } from '@/contexts/TranslationsContext';
+import LegalNotice from '@/components/LegalNotice';
+import AffiliationStatement from '@/components/AffiliationStatement'; 
 
 const Affiliation: NextPage = () => {
   return (
