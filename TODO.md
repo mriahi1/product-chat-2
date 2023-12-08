@@ -1,6 +1,5 @@
-- **OK (BJ)** cleanup fixed footer & header (margins on legal and home)
+- cleanup fixed footer & header (margins on legal and home) // footer should be in a separate .tsx
 - **OK (BJ)** keep footer links on same row
-- footer should be in a separate .tsx
 - handle load time for chat
 - make chat interactive
 - harmonize product image sizes (and fix eslint warnings)
