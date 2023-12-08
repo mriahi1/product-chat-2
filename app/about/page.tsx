@@ -4,16 +4,16 @@ import type { NextPage } from 'next';
 import Header from '@/components/Header';
 import LegalNotice from '@/components/LegalNotice';
 import AffiliationStatement from '@/components/AffiliationStatement';
-import AffiliationStatementContract from '@/components/AffiliationStatementContract';
+import AboutText from '@/components/AboutText';
 import { TranslationProvider } from '@/contexts/TranslationsContext';
 
-const Affiliation: NextPage = () => {
+const About: NextPage = () => {
   return (
     <TranslationProvider>
       <div className="container" style={{ marginTop: '100px' }}>
         <Header />
         <main className={`flex flex-col md:flex-row`}>
-          <AffiliationStatementContract />
+          <AboutText />
         </main>
          <footer>
   <div className="footer-link">
@@ -28,4 +28,4 @@ const Affiliation: NextPage = () => {
   );
 };
 
-export default Affiliation;
+export default About;
