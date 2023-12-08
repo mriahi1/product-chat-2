@@ -68,11 +68,7 @@ const Home: React.FC = () => {
                   onProductsUpdate={updateProducts}
 
                 />
-              
-              </aside>
-              <aside className="w-full md:w-3/12 p-4">
-                <GettingStarted />
-              
+
               </aside>
             </>
           )}
