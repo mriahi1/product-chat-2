@@ -2,6 +2,7 @@
 - **OK (BJ)** keep footer links on same row
 - handle load time for chat
 - make chat interactive
+- chat startover is broken (chat moved to the lhs)
 - harmonize product image sizes (and fix eslint warnings)
 - add design
 - same widths of products and chat on mobile
