@@ -2,20 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background-color: #e5e7eb;
+  font-family: "Roboto", sans-serif;
+  background-color: #f3fff2;
   color: #1f2937;
-  height: 100%;
+  /* height: 100%; */
   /* display: flex; */
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 500;
   color: #111827;
 }
@@ -36,8 +41,9 @@ button {
 .container {
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  /* margin-top: 100px; */
+  padding-left: 5rem;
+  padding-right: 5rem;
 }
 
 .section {
@@ -49,30 +55,12 @@ button {
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  
-}
-
-.header {
-  background-color: #f3f4f6;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: -5rem;
-  margin-right: -5rem;
-  background-color: darkslategrey;
-  color: white;
-  height: 40px;
-}
-
-.header h1 {
-  color: white;
 }
 
 .component {
-  border: solid 1px black !important;
+  border: solid 1px #0fff52 !important;
   background: white !important;
-  border-radius: 8px !important;
+  border-radius: 20px !important;
 }
 
 main {
@@ -81,20 +69,20 @@ main {
   /* padding-bottom: 4rem; */
 }
 
-
 footer {
   /* background-color: #f3f4f6; */
-   padding: 1rem 2rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   color: white;
   height: 80px; /* Adjust the height as needed */
   width: 100%;
+  font-size: 12px;
   flex-wrap: nowrap; /* Prevent wrapping on narrow screens */
 
   /* Styles for narrow screens (e.g., mobile devices) */
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     flex-direction: column; /* Stack elements vertically for narrow screens */
     align-items: center; /* Center elements horizontally */
   }
@@ -118,7 +106,8 @@ footer a {
   margin-top: 20px;
 }
 
-@media (max-width: 768px) { /* or whatever breakpoint you want for mobile devices */
+@media (max-width: 1200px) {
+  /* or whatever breakpoint you want for mobile devices */
   .chat-container {
     position: static; /* or 'absolute' if you want it to be positioned relative to its first positioned (not static) ancestor element */
     height: auto; /* Reset height to default */
@@ -148,25 +137,479 @@ footer a {
   }
 
   .featured-product-container {
-    width: 92%;  /* pretty hacky but it works */
+    width: 92%; /* pretty hacky but it works */
   }
 }
 
-@media (min-width: 768px) {
-.chat-with-products {
-  max-width: 350px;
-  --space-y-value: 0.5rem; /* This corresponds to 'space-y-2' which is typically 0.5rem */
-  padding: 0.75rem; /* This is 'p-3' */
-  position: relative; /* Adjust as needed, could be absolute or fixed depending on your layout */
-  top: 5rem; /* This is 'top-20' */
-  left: 5rem; /* This is 'left-20' */
-  z-index: 10; /* This is 'z-10' */
-  position: fixed; /* Fixes the element relative to the viewport */
-  display: flex; /* Sets the display mode to flex */
-  flex-direction: column; /* Stacks flex items vertically */
+@media (min-width: 1200px) {
+  .chat-with-products {
+    max-width: 350px;
+    --space-y-value: 0.5rem; /* This corresponds to 'space-y-2' which is typically 0.5rem */
+    padding: 0.75rem; /* This is 'p-3' */
+    position: relative; /* Adjust as needed, could be absolute or fixed depending on your layout */
+    top: 5rem; /* This is 'top-20' */
+    left: 5rem; /* This is 'left-20' */
+    z-index: 10; /* This is 'z-10' */
+    position: fixed; /* Fixes the element relative to the viewport */
+    display: flex; /* Sets the display mode to flex */
+    flex-direction: column; /* Stacks flex items vertically */
+  }
+
+  .chat-with-products > *:not(:last-child) {
+    margin-bottom: var(--space-y-value);
+  }
 }
 
-.chat-with-products > *:not(:last-child) {
-  margin-bottom: var(--space-y-value);
+.chat-container {
+  background-color: #0fff52;
 }
+
+/* .bg-gray-300 {
+  background-color: #eeeeee;
+}
+
+.bg-blue-500 {
+  background-color: #0FFF52;
+  color: black;
+} */
+
+input[type="text"] {
+  border: 1px solid #0fff52;
+}
+
+button {
+  background-color: #d3ffce;
+  color: "white";
+}
+
+svg {
+  stroke: #0fff52;
+}
+
+.header {
+  background-color: #f3f4f6;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: -5rem;
+  margin-right: -5rem;
+  color: white;
+  height: 40px;
+}
+
+.header-nav {
+  border-bottom: 1px solid #0fff52 !important;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.logo {
+  margin-left: -25px;
+  margin-bottom: -20px;
+}
+
+.chat-container {
+  box-shadow: 20px 20px 0px #d3ffce;
+}
+
+.guidance-text h1,
+.guidance-text-2 h1 {
+  margin-top: 140px;
+  color: #0fff52;
+  font-size: 50px;
+  max-width: 500px;
+  font-weight: 1000;
+  line-height: 1;
+}
+
+.guidance-text-2 h1 {
+  font-size: 40px;
+}
+
+.about-btn {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding-left: 15px;
+  padding-right: 0px;
+}
+
+.message-user {
+  background-color: #eeeeee;
+  color: black;
+}
+
+.message-bot {
+  background-color: #d3ffce;
+  color: black;
+}
+
+.bubble,
+.bubble-right {
+  position: relative;
+  margin-bottom: 15px !important;
+}
+
+.bubble:after,
+.bubble-right:after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent #d3ffce;
+}
+
+.bubble-right:after {
+  bottom: -10px;
+  right: 0px;
+  left: inherit;
+  border-width: 10px;
+  border-color: transparent #eeeeee transparent transparent;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid #0fff52;
+  padding: 2px;
+  border-radius: 20px;
+}
+
+.message-input {
+  flex-grow: 1;
+  border: none !important;
+  border-radius: 20px;
+  padding: 10px 20px;
+  outline: none;
+}
+
+.send-button {
+  padding: 6px 12px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.checkmark-icon {
+  width: 24px;
+  height: 24px;
+  color: #0fff52;
+}
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #0fff52;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.chat-message-loader {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+* {
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: #00ff00 #ffffff; /* thumb and track color */
+}
+
+/* Total scrollbar style */
+::-webkit-scrollbar {
+  width: 12px; /* Width of the entire scrollbar */
+}
+
+/* Handle of the scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: #00ff00; /* Green color for the thumb */
+  border-radius: 6px; /* Rounded corners on the thumb */
+  border: 3px solid #ffffff; /* Creates a little border inside the track */
+}
+
+/* Track of the scrollbar */
+::-webkit-scrollbar-track {
+  background-color: #ffffff; /* White color for the track */
+  border-radius: 6px; /* Rounded corners on the track */
+}
+
+/* Button on the scrollbar (arrows pointing upwards and downwards) */
+::-webkit-scrollbar-button {
+  display: none; /* Removes the buttons, as they are not shown in your design */
+}
+
+.product-feed {
+  background-color: #ffffff;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.featured-product .container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1024px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.featured-product .selectionBanner {
+  padding: 20px;
+  margin-bottom: -25px;
+  margin-top: 70px;
+  font-size: 24px;
+  font-weight: 900;
+  color: #fa8c16;
+}
+
+.featured-product .content {
+  display: flex;
+  padding: 20px;
+  background-color: white;
+  height: 60vh;
+  margin-bottom: 0;
+  /* margin-top: 40px; */
+}
+
+.featured-product .imageContainer {
+  flex: 1.6;
+  padding-right: 20px;
+}
+
+.featured-product .image {
+  width: 100%;
+  height: auto;
+}
+
+.featured-product .details {
+  flex: 2;
+  padding-left: 20px;
+}
+
+.featured-product .title {
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.featured-product .price {
+  font-size: 24px;
+  text-align: right;
+  font-weight: bold;
+  color: black;
+}
+
+.featured-product .visitShopButton {
+  background-color: #fa8c16;
+  color: white;
+  text-align: center;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 15px;
+  border-radius: 20px;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.featured-product .descriptionContainer {
+  margin-top: 20px;
+}
+
+.featured-product .descriptionTitle {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.featured-product .description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.featured-product .productDetails {
+  font-size: 14px;
+  color: #666;
+}
+
+.featured-product .product_attributes {
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+.featured-product .productDetailsTitle {
+  font-weight: bold;
+}
+
+.featured-product .divider {
+  width: 100%;
+  height: 1px;
+  background-color: #fa8c16;
+  margin-bottom: 20px;
+}
+
+.not-found-container {
+  padding: 20px;
+  margin-bottom: 120px;
+  background-color: #f7f7f7;
+  border-radius: 16px;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.not-found-header {
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.not-found-subtext {
+  color: #666;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.category-button {
+  background-color: #00ff00;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.back-to-chat-button {
+  background-color: #ffa500;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    margin-top: 45px;
+  }
+  .guidance-text h1,
+  .guidance-text-2 h1 {
+    margin-top: 0px;
+    font-size: 30px;
+  }
+  main {
+    margin-top: 0px;
+  }
+  .product-feed {
+    margin-top: 0px;
+  }
+
+  /* Assuming .featured-product is the class for the top-level container of your component */
+  .featured-product .container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .featured-product .selectionBanner {
+    padding: 20px;
+    margin-bottom: -25px;
+    margin-top: 70px;
+    font-size: 24px;
+    font-weight: 900;
+    color: #fa8c16;
+  }
+
+  .featured-product .content {
+    display: flex;
+    padding: 20px;
+    background-color: white;
+    height: 80vh;
+    margin-bottom: 0;
+  }
+
+  .featured-product .imageContainer {
+    flex: 3;
+    padding-right: 20px;
+  }
+
+  .featured-product .image {
+    width: 100%;
+    height: auto;
+  }
+  .featured-product .details {
+    flex: 2;
+    padding-left: 20px;
+  }
+  .featured-product .content {
+    flex-direction: column;
+  }
+  .product-feed {
+    margin-top: 20px
+  }
+
+  .featured-product .imageContainer,
+  .featured-product .details {
+    /* flex: 1 0 100%; Take full width in mobile view */
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .featured-product .divider {
+    display: none;
+  }
+  .featured-product .container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .featured-product .content {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding-left: 50px;
+  padding-right: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeOut 2s ease forwards;
+  z-index: 9999;
 }

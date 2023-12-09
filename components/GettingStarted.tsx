@@ -1,15 +1,26 @@
 import React from 'react';
 import { useTranslation } from "@/contexts/TranslationsContext";
 
-const GettingStarted: React.FC = () => {
+interface GettingStartedProps {
+  step: number;
+}
+
+const GettingStarted: React.FC<GettingStartedProps> = ({ step }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col bg-white border-r border-gray-200 w-80 p-4">
-      <h1 className="text-xl font-semibold mb-2">{t('eco_chatbot_title')}</h1>
-       <p className="text-gray-600 mb-4" style={{ whiteSpace: 'pre-line' }}>{t('eco_chatbot_purpose')}</p>
-     
-    </div>
+    <>
+      {step === 1 && (
+        <div className="guidance-text flex flex-col p-4">
+          <h1>{t('support_text_1')}</h1>
+        </div>
+      )}
+      {step === 2 && (
+        <div className="guidance-text-2 flex flex-col p-4">
+          <h1>{t('support_text_2')}</h1>
+        </div>
+      )}
+    </>
   );
 };
 

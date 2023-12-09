@@ -21,26 +21,27 @@ const Header: React.FC<HeaderProps> = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-10 flex justify-between items-center p-4 bg-white shadow-md">
+      <header className="header-nav fixed top-0 left-0 right-0 z-10 flex justify-between items-center p-2">
         <div className="logo">
           <Link href="/">
-            <h1>FETCHIZY <small>beta</small></h1>
+            {/* <h1>FETCHIZY <small>beta</small></h1> */}
+            <img src={"LOGO_FETCHIZY.png"} alt="" className="h-12 rounded" />
           </Link>
         </div>
 
         <div className="flex items-center">
           {/* Ajout du lien vers "About.tsx" */}
-          <Link href="/about">
+          <Link href="/about" className="about-btn">
             <h1 className="mr-4">{t?.('about_mention')}</h1>
           </Link>
 
           <select
             value={language}
             onChange={handleLanguageChange}
-            className="appearance-none bg-transparent border-b border-gray-300 hover:border-blue-500 focus:border-blue-500 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:shadow-outline"
+            className="appearance-none bg-transparent py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           >
-            <option value="en">🇬🇧 EN</option>
-            <option value="fr">🇫🇷 FR</option>
+            <option value="en">EN</option>
+            <option value="fr">FR</option>
           </select>
         </div>
       </header>
