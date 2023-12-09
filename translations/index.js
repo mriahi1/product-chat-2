@@ -51,7 +51,20 @@ const en = {
     legal_mention_contract: "In accordance with the provisions of French Law No. 2004-575 of June 21, 2004, concerning trust in the digital economy, users of the Fetchizy website are hereby informed of the identity of the various parties involved in its creation and monitoring.\n\n\n**Website Editing**\nThis website, accessible at the URL https://www.fetchizy.com/ (the 'Site'), is edited by:\nBastien Jeauffroy, residing at 12 avenue de Wagram, 75017 PARIS, of French nationality (France), born on 10/09/1991.\n\n\n**Hosting**\nThe Site is hosted by the company Vercel, located at 440 N Barranca Ave #4133, Covina, CA 91723, USA (email: privacy@vercel.com).\n\n\n**Publication Director**\nThe Publication Director of the Site is Bastien Jeauffroy.\n\n\n**Contact Us**\nBy email: girijo.sas@gmail.com",
     affiliation_mention: "Affiliate Statement",
     affiliation_mention_contract: "As an Amazon Associate, this website earn from qualifying purchases.",
-    cookie_notice: "This website uses cookies to enhance the user experience."
+    cookie_notice: "This website uses cookies to enhance the user experience.",
+    hello: "Hello,",
+    what_are_you_looking_for: "what are you looking for today?",
+    support_text_1: "Fetchizy, your pocket Shopping Companion",
+    could_you_be_more_specific: "Could you be more specific?",
+    support_text_2: "Scroll to descover our selection",
+    no_products: "No products found",
+    pick_categories_header: "Didn' find what you were looking for?",
+    pick_categories_subtext: "These categories might help you find what you need",
+    cat_1: "Electronics",
+    cat_2: "Clothing",
+    reset_subtext: "Otherwise, you can go back to the chat",
+    reset_chat: "Back to the Chat",
+
   };
 //   export default en;
   
@@ -108,7 +121,19 @@ const en = {
     legal_mention_contract: "Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour la confiance en l'économie numérique, il est précisé aux utilisateurs du site Fetchizy l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.\n\n\n**Edition du site**\nLe présent site, accessible à l’URL https://www.fetchizy.com/ (le « Site »), est édité par :\nBastien Jeauffroy, résidant 12 avenue de Wagram 75017 PARIS, de nationalité Française (France), né(e) le 10/09/1991. \n\n\n**Hébergement**\nLe Site est hébergé par la société Vercel, située 440 N Barranca Ave #4133, Covina, CA 91723, USA, (contact email : privacy@vercel.com).\n\n\n**Directeur de publication**\nLe Directeur de la publication du Site est Bastien Jeauffroy.\n\n\n**Nous contacter**\nPar email : girijo.sas@gmail.com",
     affiliation_mention: "Déclaration d'affiliation",
     affiliation_mention_contract: "En tant que Partenaire Amazon, ce site réalise un bénéfice sur les achats remplissant les conditions requises.",
-    cookie_notice: "Ce site utilise des cookies pour améliorer l'expérience utilisateur."
+    cookie_notice: "Ce site utilise des cookies pour améliorer l'expérience utilisateur.",
+    hello: "Bonjour,",
+    what_are_you_looking_for: "que cherchez-vous aujourd'hui?",
+    support_text_1: "Fetchizy, votre Compagnon Shopping de poche",
+    could_you_be_more_specific: "Pourriez-vous être plus précis?",
+    support_text_2: "Scrollez pour découvrir notre sélection",
+    no_products: "Aucun produit trouvé",
+    pick_categories_header: "VOUS N’AVEZ PAS TROUVÉ VOTRE BONHEUR ?",
+    pick_categories_subtext: "Ces catégories pourraient vous aider à trouver ce dont vous avez besoin",
+    cat_1: "Electronique",
+    cat_2: "Vêtements",
+    reset_subtext: "Sinon, vous pouvez retourner au chat",
+    reset_chat: "Retour au Chat",
   };
 //   export default fr;
 

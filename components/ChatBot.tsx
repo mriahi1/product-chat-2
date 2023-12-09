@@ -17,18 +17,19 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
   const { t } = useTranslation();
 
   const suggestions = [
-    { title: t("find_me"), subtitle: t('for_my_dog') },
-    { title: t('find_a_deal'), subtitle: t('for_iphone_earphones') },
-    { title: t('i_need'), subtitle: t('an_iphone_charger')  },
+    { title: t("hello"), subtitle: t('what_are_you_looking_for') },
+    // { title: t('find_a_deal'), subtitle: t('for_iphone_earphones') },
+    // { title: t('i_need'), subtitle: t('an_iphone_charger')  },
     // ... add more suggestions as needed
   ];
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    if (messages.length > 8) {
-      chatContainerRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messages.length > 5) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
+    
   };
 
   const handleResetProductSelect = () => {
@@ -107,32 +108,37 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
     let message: any;
 
     let responseData: any;
-    if (chatBotConfig.useApi) {
-      responseData = await fetchApiData(searchTerm);
-      if (responseData.recommendation.length !== 0) {
-        // Convert API response to Product array
-        const recommendations: Product[] = responseData.recommendation.map((p: any) => ({
-          id: parseInt(p.id, 10), 
-          title: p.title,
-          description: p.description,
-          images: [p.image],
-          price: p.price,
-          url: p.url,
-          rating: p.rating,
-          distributor: p.distributor,
-          countryOfOrigin: p.country_of_origin,
-          manufacturer: p.manufacturer
-        }));
-        products = recommendations
-        product = recommendations[0]
-      }
 
-      message = product ? `${t('here_is_what_i_found')}: ${product.title}` : t("nothing_found")
+    if (messages.length > 0) {
+      if (chatBotConfig.useApi) {
+        responseData = await fetchApiData(searchTerm);
+        if (responseData.recommendation.length !== 0) {
+          // Convert API response to Product array
+          const recommendations: Product[] = responseData.recommendation.map((p: any) => ({
+            id: parseInt(p.id, 10), 
+            title: p.title,
+            description: p.description,
+            images: [p.image],
+            price: p.price,
+            url: p.url,
+            rating: p.rating,
+            distributor: p.distributor,
+            countryOfOrigin: p.country_of_origin,
+            manufacturer: p.manufacturer
+          }));
+          products = recommendations
+          product = recommendations[0]
+        }
+
+        message = product ? `${t('here_is_what_i_found')}: ${product.title}` : t("nothing_found")
+      } else {
+        responseData = await getRecommendedProduct(searchTerm); 
+        product = responseData.product
+        products = responseData.products
+        message = responseData.message
+      } 
     } else {
-      responseData = await getRecommendedProduct(searchTerm); 
-      product = responseData.product
-      products = responseData.products
-      message = responseData.message
+      message = t("could_you_be_more_specific")
     }
   
     setTimeout(() => {
@@ -158,9 +164,9 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
     performSearch(inputMessage);
   };
 
-  const handleSuggestionClick = (suggestion: string) => {
-    performSearch(suggestion);
-  };
+  // const handleSuggestionClick = (suggestion: string) => {
+  //   performSearch(suggestion);
+  // };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -180,36 +186,47 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
 
   return (
     <>
-    <div className={`chat-container component flex flex-col p-3 ${messages?.length > 0 ? 'chat-with-products' : ''}`}>
+    <div className={`chat-container component flex flex-col p-3`}>
       <div
         ref={chatContainerRef}
         className="overflow-y-auto p-3 space-y-2"
         style={{ height: "calc(100vh - 350px)" }}
       >
         {messages.length === 0 && !isBotThinking ? (
-          <>
-            <p className="text-gray-900 font-bold mb-4">{t?.("chat_title")}</p>
-            {suggestions.map((suggestion, index) => (
-              <button
-                key={index}
-                onClick={() => handleSuggestionClick(suggestion.title + " " + suggestion.subtitle)}
-                className="text-gray-800 font-semibold py-2 px-4 border border-gray-300 rounded-lg shadow-sm hover:bg-gray-100 transition ease-in-out duration-150 w-full text-left"
-              >
-                {suggestion.title}
-                <div className="text-gray-500 text-sm">
-                  {suggestion.subtitle}
-                </div>
-              </button>
-            ))}
-          </>
+          // <>
+          //   <p className="text-gray-900 font-bold mb-4">{t?.("chat_title")}</p>
+          //   {suggestions.map((suggestion, index) => (
+          //     <button
+          //       key={index}
+          //       onClick={() => handleSuggestionClick(suggestion.title + " " + suggestion.subtitle)}
+          //       className="message-bot bubble font-semibold py-2 px-4 shadow-sm hover:message-bot transition ease-in-out duration-150 w-full text-left"
+          //     >
+          //       {suggestion.title}
+          //       <div className="text-gray-500 text-sm">
+          //         {suggestion.subtitle}
+          //       </div>
+          //     </button>
+          //   ))}
+          // </>
+           <>
+           <p className="text-gray-900 font-bold mb-4">{t?.("chat_title")}</p>
+           {suggestions.map((suggestion, index) => (
+             <div
+              key={index}
+              className={`break-words p-3 rounded-lg message-bot bubble text-white align-right mb-2`}
+            >
+              {suggestion.title} {suggestion.subtitle}
+            </div>
+           ))}
+         </>
         ) : (
           messages.map((message, index) => (
             <div
               key={index}
-              className={`break-words p-3 rounded-lg ${
+              className={`break-words p-3 rounded-lg bubble mb-2 ${
                 message.sender === "user"
-                  ? "bg-gray-300 text-gray-800 align-left mb-2"
-                  : "bg-blue-500 text-white align-right mb-2"
+                  ? "message-user bubble-right text-gray-800 align-left"
+                  : "message-bot text-white align-right"
               }`}
             >
               {message.content}
@@ -217,25 +234,28 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
           ))
         )}
         {isBotThinking && (
-          <div className="break-words p-3 bg-blue-500 text-white align-right rounded-lg mb-2">
-            {t?.("chat_loading")}
+          <div className="break-words p-3 message-bot bubble text-white align-right rounded-lg mb-2">
+            {/* {t?.("chat_loading")} */}
+            <div className="chat-message-loader">
+              <div className="loader"></div>
+            </div>
           </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="border-t border-gray-300 p-2 flex items-center space-x-2">
+      <div className="p-2 flex items-center input-group">
         <input
           type="text"
           placeholder={t('message_placeholder')}
-          className="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none"
+          className="message-input"
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
           onKeyPress={handleKeyPress}
         />
         <button
           onClick={handleSendMessage}
-          className="flex-none text-gray-500 p-2 focus:outline-none"
+          className="send-button"
         >
           <svg
             className="w-6 h-6"
@@ -250,12 +270,12 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
           </svg>
         </button>
       </div>
-      <button
+      {/* <button
         onClick={handleResetProductSelect}
         className="flex-none text-gray-500 p-2 focus:outline-none"
       >
         {t?.('start_over')}
-      </button>
+      </button> */}
     </div>
     
   </>

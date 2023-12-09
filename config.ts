@@ -1,5 +1,5 @@
 export const chatBotConfig = {
-    useApi: true,
+    useApi: false,
     apiUrl: "https://urchin-app-gruic.ondigitalocean.app/recommendation",
   };
   

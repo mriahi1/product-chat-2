@@ -4,7 +4,7 @@ import { Product } from "@/types/Product";
 import ChatBot from "@/components/ChatBot";
 // import FeaturedProduct from "@/components/FeaturedProduct";
 import ProductFeed from "@/components/ProductFeed";
-import RecommendedProducts from "@/components/RecommendedProducts";
+// import RecommendedProducts from "@/components/RecommendedProducts";
 import Header from "@/components/Header";
 import { TranslationProvider } from "@/contexts/TranslationsContext";
 import GettingStarted from "@/components/GettingStarted";
@@ -32,37 +32,25 @@ const Home: React.FC = () => {
         <Header />
 
         <main
-          className={`page-section flex flex-col md:flex-row ${
-            selectedProduct ? "" : "justify-center"
-          }`}
+          className={`page-section flex flex-col md:flex-row`}
         >
           {products && products.length > 0 ? (
             <>
-              <aside className="w-full md:w-3/12 h-full">
-                <ChatBot
-                  onProductSelect={updateSelectedProduct}
-                  onProductsUpdate={updateProducts}
-                />
-                
+              <aside className="w-full md:w-4/12 h-full">
+                <GettingStarted step={2} />
               </aside>
 
-              <section className="w-full md:w-5/12">
+              <section className="w-full md:w-8/12">
                 {/* <FeaturedProduct {...selectedProduct} /> */}
-                <ProductFeed products={products} />
+                <ProductFeed products={products} onProductsUpdate={updateProducts} />
               </section>
-
-              {/* {products && products.length > 0 && (
-              <aside className="w-full md:w-3/12 p-4">
-                <RecommendedProducts
-                  products={products}
-                  onProductSelect={updateSelectedProduct}
-                />
-              </aside>
-              )} */}
             </>
           ) : (
             <>
-              <aside className="w-full md:w-6/12 p-4">
+              <aside className="w-full md:w-6/12">
+                <GettingStarted step={1} />
+              </aside>
+              <aside className="w-full md:w-6/12 p-t-4">
                 <ChatBot
                   onProductSelect={updateSelectedProduct}
                   onProductsUpdate={updateProducts}
