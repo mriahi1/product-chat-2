@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Product } from "@/types/Product";
 import ChatBot from "@/components/ChatBot";
 // import FeaturedProduct from "@/components/FeaturedProduct";
@@ -15,6 +15,14 @@ import AffiliationStatement from '@/components/AffiliationStatement';
 const Home: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const updateSelectedProduct = (product: Product) => {
     setSelectedProduct(product);
@@ -26,7 +34,12 @@ const Home: React.FC = () => {
 
   return (
     <TranslationProvider>
-      
+
+      {loading && (
+        <div className="loading-screen">
+          <img src={"LOGO_FETCHIZY_BASELINE.png"} alt="Logo" />
+        </div>
+      )}
 
       <div className="container">
         <Header />
