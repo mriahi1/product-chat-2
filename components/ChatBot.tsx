@@ -26,20 +26,20 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    if (messages.length > 5) {
+    if (messagesEndRef.current && messages.length > 5) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
     
   };
 
-  const handleResetProductSelect = () => {
-    if (onProductsUpdate) {
-      setMessages([]);
-      onProductsUpdate([])
-      // onProductSelect([]);
-      // onProductSelect();
-    }
-  };
+  // const handleResetProductSelect = () => {
+  //   if (onProductsUpdate) {
+  //     setMessages([]);
+  //     onProductsUpdate([])
+  //     // onProductSelect([]);
+  //     // onProductSelect();
+  //   }
+  // };
 
 
   useEffect(() => {
