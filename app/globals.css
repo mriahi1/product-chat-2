@@ -510,6 +510,7 @@ svg {
   cursor: pointer;
 }
 
+
 @media (max-width: 1200px) {
   .container {
     padding-left: 1.2rem;
@@ -520,9 +521,6 @@ svg {
   .guidance-text-2 h1 {
     margin-top: 0px;
     font-size: 30px;
-  }
-  main {
-    margin-top: 0px;
   }
   .product-feed {
     margin-top: 0px;
@@ -612,4 +610,10 @@ svg {
   align-items: center;
   animation: fadeOut 2s ease forwards;
   z-index: 9999;
+}
+
+@media (max-width: 400px) {
+  main {
+    margin-top: 0px;
+  }
 }
