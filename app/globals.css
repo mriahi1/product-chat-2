@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Anton");
 
 html,
 body {
@@ -21,7 +22,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 500;
+  font-family: "Anton", sans-serif;
+  font-weight: 1000;
   color: #111827;
 }
 
@@ -187,7 +189,7 @@ svg {
 }
 
 .header {
-  background-color: #f3f4f6;
+  background-color: #f3fff2;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -196,6 +198,13 @@ svg {
   margin-right: -5rem;
   color: white;
   height: 40px;
+}
+
+.header-divider {
+  background-color: #0fff52;
+  height: 1px;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .header-nav {
