@@ -13,6 +13,7 @@ interface FeaturedProductProps {
   distributor: string;
   countryOfOrigin: string;
   manufacturer: string;
+  count: number;
 }
 
 const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
@@ -42,6 +43,7 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
     distributor,
     countryOfOrigin,
     manufacturer,
+    count,
   } = props;
 
   if (!product || !product?.images) {
@@ -72,23 +74,32 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
   //   </>
   // );
 
+  function truncateText(text: string, maxLength: number): string {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    } else {
+      return text;
+    }
+  }
+  
+
   return (
     <div className="featured-product">
-      <div className="selectionBanner">SÉLECTION #{id}</div>
+      <div className="selectionBanner">SÉLECTION #{count}</div>
       <div className="container">
         <div className="content flex flex-col md:flex-row">
           <div className="imageContainer w-full md:w-1/2">
             <img src={images[0]} alt={title} className="image" />
           </div>
           <div className="details w-full md:w-1/2">
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div className="titleSection" style={{ display: "flex", justifyContent: "space-between" }}>
               <div>
-                <h2 className="title">{title}</h2>
+                <h2 className="title">{truncateText(title, 50)}</h2>
                 <hr className="divider"/>
               </div>
               <div>
                 <p className="price">{price.toFixed(2)} €</p>
-                <a href={url} className="visitShopButton">
+                <a target="_blank" href={url} className="visitShopButton">
                   {t?.("visit_shop")}
                 </a>
               </div>

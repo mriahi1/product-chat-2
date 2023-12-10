@@ -114,7 +114,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
         responseData = await fetchApiData(searchTerm);
         if (responseData.recommendation.length !== 0) {
           // Convert API response to Product array
-          const recommendations: Product[] = responseData.recommendation.map((p: any) => ({
+          const recommendations: Product[] = responseData.recommendation.map((p: any, index: number) => ({
             id: parseInt(p.id, 10), 
             title: p.title,
             description: p.description,
@@ -124,10 +124,11 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
             rating: p.rating,
             distributor: p.distributor,
             countryOfOrigin: p.country_of_origin,
-            manufacturer: p.manufacturer
+            manufacturer: p.manufacturer,
+            count: index + 1
           }));
-          products = recommendations
-          product = recommendations[0]
+          products = recommendations;
+          product = recommendations[0];
         }
 
         message = product ? `${t('here_is_what_i_found')}: ${product.title}` : t("nothing_found")

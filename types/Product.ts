@@ -10,5 +10,6 @@ export interface Product {
     distributor: string;
     countryOfOrigin: string;
     manufacturer: string;
+    count: number;
   }
   
