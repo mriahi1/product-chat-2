@@ -125,7 +125,7 @@ const en = {
     hello: "Bonjour,",
     what_are_you_looking_for: "que cherchez-vous aujourd'hui?",
     support_text_1: "FETCHIZY, VOTRE COMPAGNON SHOPPING DE POCHE",
-    could_you_be_more_specific: "Pourriez-vous être plus précis?",
+    could_you_be_more_specific: "Pouves-vous me donner plus de détails ?",
     support_text_2: "SCROLLEZ POUR DECOUVRIR NOTRE SELECTION",
     no_products: "Aucun produit trouvé",
     pick_categories_header: "VOUS N’AVEZ PAS TROUVÉ VOTRE BONHEUR ?",
