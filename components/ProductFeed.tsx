@@ -1,15 +1,17 @@
 import React from 'react';
 import { Product } from '@/types/Product';
+import { Category } from '@/types/Category';
 import { useTranslation } from '@/contexts/TranslationsContext';
 import FeaturedProduct from "@/components/FeaturedProduct";
 import ResetChat from "@/components/ResetChat";
 
 interface FeaturedProductsFeedProps {
     products: Product[];
+    categories: Category[];
     onProductsUpdate?: (products: Product[]) => void;
 }
 
-const FeaturedProductsFeed: React.FC<FeaturedProductsFeedProps> = ({ products, onProductsUpdate }) => {
+const FeaturedProductsFeed: React.FC<FeaturedProductsFeedProps> = ({ products, categories, onProductsUpdate }) => {
     const { t } = useTranslation();
 
     if (!products || products.length === 0) {
@@ -23,7 +25,7 @@ const FeaturedProductsFeed: React.FC<FeaturedProductsFeedProps> = ({ products, o
                     <FeaturedProduct {...product} />
                 </div>
             ))}
-            <ResetChat onProductsUpdate={onProductsUpdate} />
+            <ResetChat onProductsUpdate={onProductsUpdate} categories={categories} />
         </div>
     );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Product } from "@/types/Product";
+import { Category } from "@/types/Category";
 import { ChatMessage } from "@/types/ChatMessage";
 import { useTranslation } from "@/contexts/TranslationsContext";
 import { chatBotConfig } from '@/config';
@@ -7,9 +8,10 @@ import { chatBotConfig } from '@/config';
 interface ChatBotProps {
   onProductSelect?: (product: Product) => void;
   onProductsUpdate?: (products: Product[]) => void;
+  onCategoriesUpdate?: (categories: Category[]) => void;
 }
 
-const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) => {
+const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, onCategoriesUpdate }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const [isBotThinking, setIsBotThinking] = useState(false);
@@ -49,12 +51,18 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
   const getRecommendedProduct = async (userInput: string) => {
     const lowerCaseUserInput = userInput.toLowerCase();
     let products;
+    let categories;
 
     let mockProductData = async () => {
       return await import('@/data/mockProductData').then((module) => module.mockProductData());
     }
 
+    let mockCategoryData = async () => {
+      return await import('@/data/mockCategoryData').then((module) => module.mockCategoryData());
+    }
+
     products = await mockProductData();
+    categories = await mockCategoryData();
 
     const foundProduct = products.find((product) =>
       product.title.toLowerCase().includes(lowerCaseUserInput)
@@ -63,6 +71,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
     return {
       product: foundProduct,
       products: products,
+      categories: categories,
       message: foundProduct ? `${t('here_is_what_i_found')}: ${foundProduct.title}` : t("nothing_found")
     };
   };
@@ -106,6 +115,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
     let product: any;
     let products: any;
     let message: any;
+    let categories: any;
 
     let responseData: any;
 
@@ -136,6 +146,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
         responseData = await getRecommendedProduct(searchTerm); 
         product = responseData.product
         products = responseData.products
+        categories = responseData.categories
         message = responseData.message
       } 
     } else {
@@ -147,6 +158,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
         onProductSelect && onProductSelect(product);
         addBotMessage(message);
         onProductsUpdate && onProductsUpdate(products); // Update product list
+        onCategoriesUpdate && onCategoriesUpdate(categories);
       } else {
         addBotMessage(message);
       }

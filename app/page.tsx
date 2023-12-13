@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Product } from "@/types/Product";
+import { Category } from "@/types/Category";
 import ChatBot from "@/components/ChatBot";
 // import FeaturedProduct from "@/components/FeaturedProduct";
 import ProductFeed from "@/components/ProductFeed";
@@ -15,6 +16,7 @@ import AffiliationStatement from '@/components/AffiliationStatement';
 const Home: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,6 +32,10 @@ const Home: React.FC = () => {
 
   const updateProducts = (products: Product[]) => {
     setProducts(products);
+  }
+
+  const updateCategories = (categories: Category[]) => {
+    setCategories(categories);
   }
 
   return (
@@ -55,7 +61,7 @@ const Home: React.FC = () => {
 
               <section className="w-full md:w-8/12">
                 {/* <FeaturedProduct {...selectedProduct} /> */}
-                <ProductFeed products={products} onProductsUpdate={updateProducts} />
+                <ProductFeed products={products} categories={categories} onProductsUpdate={updateProducts} />
               </section>
             </>
           ) : (
@@ -67,6 +73,7 @@ const Home: React.FC = () => {
                 <ChatBot
                   onProductSelect={updateSelectedProduct}
                   onProductsUpdate={updateProducts}
+                  onCategoriesUpdate={updateCategories}
 
                 />
 

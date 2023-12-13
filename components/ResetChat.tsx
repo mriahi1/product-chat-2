@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from "@/contexts/TranslationsContext";
 import { Product } from '@/types/Product';
+import { Category } from '@/types/Category';
 
 interface CategoryProps {
   label: string;
@@ -13,6 +14,7 @@ interface BackCategoryProps {
 
 interface NotFoundProps {
   onProductsUpdate?: (products: Product[]) => void;
+  categories: Category[];
 }
 
 const CategoryButton: React.FC<CategoryProps> = ({ label }) => {
@@ -37,15 +39,24 @@ const BackToChatButton: React.FC<BackCategoryProps> = ({ label, onProductsUpdate
   );
 };
 
-const NotFound: React.FC<NotFoundProps> = ({ onProductsUpdate }) => {
+const NotFound: React.FC<NotFoundProps> = ({ onProductsUpdate, categories }) => {
   const { t } = useTranslation();
+
+  console.log(categories)
   return (
     <div className="not-found-container">
       <h1 className="not-found-header">{t('pick_categories_header')}</h1>
       <p className="not-found-subtext">{t('pick_categories_subtext')}</p>
+
       <div className="button-container">
-        <CategoryButton label={t('cat_1')} />
-        <CategoryButton label={t('cat_2')} />
+   
+            {categories?.length > 0 && categories.map((category, index) => (
+                
+                <div key={index}>
+                   <CategoryButton label={category.name} />
+                </div>
+
+            ))}
       </div>
       <p className="not-found-subtext">{t('reset_subtext')}</p>
       <BackToChatButton label={t('reset_chat')} onProductsUpdate={onProductsUpdate} />
