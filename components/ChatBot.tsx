@@ -269,7 +269,8 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
            ))}
          </>
         ) : (
-          messages.map((message, index) => (
+          <div className="category-messages-container">
+          {messages.map((message, index) => (
 
             <div key={index} className={`break-words p-3 rounded-lg bubble mb-2 ${message.sender === "user" ? "message-user bubble-right text-gray-800 align-left" : "message-bot text-white align-right"} ${message.category ? "category-message" : ""}`}>
               {message.category ? (
@@ -280,7 +281,8 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
                 message.content
               )}
             </div>
-          ))
+          ))}
+          </div>
         )}
         {isBotThinking && (
             <div className="loading-container">

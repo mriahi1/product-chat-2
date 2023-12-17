@@ -494,31 +494,6 @@ svg {
   margin: 10px 0;
 }
 
-/* .button-container {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px 0;
-} */
-
-.category-button {
-  display: block;
-  width: 100%;
-  background-color: #00ff00;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 10px 20px;
-  cursor: pointer;
-  text-align: center;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-}
-
-/* .category-button:last-child {
-  margin-bottom: 0;
-} */
-
 .back-to-chat-button {
   background-color: #ffa500;
   color: white;
@@ -691,6 +666,19 @@ svg {
   100% { transform: rotate(360deg); }
 }
 
+/* .category-button {
+  display: block;
+  width: 100%;
+  background-color: #00ff00;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+} */
 .category-button {
   background-color: #4CAF50;
   border: none;
