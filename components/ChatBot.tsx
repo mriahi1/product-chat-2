@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Product } from "@/types/Product";
+import { Category } from "@/types/Category";
 import { ChatMessage } from "@/types/ChatMessage";
 import { useTranslation } from "@/contexts/TranslationsContext";
 import { chatBotConfig } from '@/config';
@@ -7,12 +8,15 @@ import { chatBotConfig } from '@/config';
 interface ChatBotProps {
   onProductSelect?: (product: Product) => void;
   onProductsUpdate?: (products: Product[]) => void;
+  onCategoriesUpdate?: (categories: Category[]) => void;
+  selectedCategories?: Category[];
 }
 
-const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) => {
+const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, onCategoriesUpdate, selectedCategories }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const [isBotThinking, setIsBotThinking] = useState(false);
+  const [selectionCount, setSelectionCount] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
 
@@ -28,9 +32,30 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
   const scrollToBottom = () => {
     if (messagesEndRef.current && messages.length > 5) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
-    
+    } 
   };
+
+  const addBotCategoryMessages = (categories: Category[]) => {
+
+    const topThreeCategories = categories.slice(0, 3);
+    const categoryMessages: ChatMessage[] = topThreeCategories.map(category => ({
+      sender: "bot",
+      content: category.name,
+      category: category
+    }));
+
+    setMessages(prevMessages => [...prevMessages, ...categoryMessages]);
+  };
+
+  const handleCategoryClick = (category: Category) => {
+    if (selectionCount >= 2) {
+      window.open(category.amazon_url, '_blank');
+    } else {
+      setSelectionCount(prevCount => prevCount + 1);
+      performSearch(category.name);
+    }
+  };
+
 
   // const handleResetProductSelect = () => {
   //   if (onProductsUpdate) {
@@ -49,12 +74,18 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
   const getRecommendedProduct = async (userInput: string) => {
     const lowerCaseUserInput = userInput.toLowerCase();
     let products;
+    let categories;
 
     let mockProductData = async () => {
       return await import('@/data/mockProductData').then((module) => module.mockProductData());
     }
 
+    let mockCategoryData = async () => {
+      return await import('@/data/mockCategoryData').then((module) => module.mockCategoryData());
+    }
+
     products = await mockProductData();
+    categories = await mockCategoryData();
 
     const foundProduct = products.find((product) =>
       product.title.toLowerCase().includes(lowerCaseUserInput)
@@ -63,6 +94,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
     return {
       product: foundProduct,
       products: products,
+      categories: categories,
       message: foundProduct ? `${t('here_is_what_i_found')}: ${foundProduct.title}` : t("nothing_found")
     };
   };
@@ -74,13 +106,13 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
       ...prevMessages,
       { sender: "user", content: message.trim() },
     ]);
-
     setIsBotThinking(true);
   };
 
   const fetchApiData = async (searchTerm: string) => {
     try {
-      const response = await fetch(`/api/recommendations`, {
+      // /api/recommendations
+      const response = await fetch(`/api/categories`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -103,50 +135,59 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
     sendMessage(searchTerm);
     setInputMessage("");
 
-    let product: any;
-    let products: any;
+    // let product: any;
+    // let products: any;
     let message: any;
-
+    let categories: any;
     let responseData: any;
 
-    if (messages.length > 0) {
+    if (true || messages.length > 0) {
       if (chatBotConfig.useApi) {
         responseData = await fetchApiData(searchTerm);
-        if (responseData.recommendation.length !== 0) {
+        if (responseData.category.length !== 0) {
+
+          categories = responseData.category
           // Convert API response to Product array
-          const recommendations: Product[] = responseData.recommendation.map((p: any, index: number) => ({
-            id: parseInt(p.id, 10), 
-            title: p.title,
-            description: p.description,
-            images: [p.image],
-            price: p.price,
-            url: p.url,
-            rating: p.rating,
-            distributor: p.distributor,
-            countryOfOrigin: p.country_of_origin,
-            manufacturer: p.manufacturer,
-            count: index + 1
-          }));
-          products = recommendations;
-          product = recommendations[0];
+          // const recommendations: Product[] = responseData.recommendation.map((p: any, index: number) => ({
+          //   id: parseInt(p.id, 10), 
+          //   title: p.title,
+          //   description: p.description,
+          //   images: [p.image],
+          //   price: p.price,
+          //   url: p.url,
+          //   rating: p.rating,
+          //   distributor: p.distributor,
+          //   countryOfOrigin: p.country_of_origin,
+          //   manufacturer: p.manufacturer,
+          //   count: index + 1
+          // }));
+          // products = recommendations;
+          // product = recommendations[0];
         }
 
-        message = product ? `${t('here_is_what_i_found')}: ${product.title}` : t("nothing_found")
+        message = categories.length ? `${t('here_is_what_i_found')}` : t("nothing_found")
       } else {
         responseData = await getRecommendedProduct(searchTerm); 
-        product = responseData.product
-        products = responseData.products
+        // product = responseData.product
+        // products = responseData.products
+        categories = responseData.categories
         message = responseData.message
       } 
     } else {
       message = t("could_you_be_more_specific")
     }
+
+    // console.log('searchTerm', searchTerm, messages, message, categories, responseData)
   
     setTimeout(() => {
       if (responseData) {
-        onProductSelect && onProductSelect(product);
-        addBotMessage(message);
-        onProductsUpdate && onProductsUpdate(products); // Update product list
+        if (responseData.category) {
+          addBotCategoryMessages(responseData.category);
+        }
+        // onProductSelect && onProductSelect(product);
+        // onProductsUpdate && onProductsUpdate(products); // Update product list
+        // addBotMessage(message);
+        // onCategoriesUpdate && onCategoriesUpdate(categories);
       } else {
         addBotMessage(message);
       }
@@ -164,6 +205,16 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
   const handleSendMessage = () => {
     performSearch(inputMessage);
   };
+
+  useEffect(() => {
+    if (selectedCategories && selectedCategories.length > 0) {
+      const categoryNames = selectedCategories.map((category: Category) => category.name).join("+");
+      
+      const newSearchTerm = `${inputMessage} +${categoryNames}`.trim();
+      performSearch(newSearchTerm);
+    }
+  }, [selectedCategories]);
+
 
   // const handleSuggestionClick = (suggestion: string) => {
   //   performSearch(suggestion);
@@ -194,21 +245,6 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
         style={{ height: "calc(100vh - 350px)" }}
       >
         {messages.length === 0 && !isBotThinking ? (
-          // <>
-          //   <p className="text-gray-900 font-bold mb-4">{t?.("chat_title")}</p>
-          //   {suggestions.map((suggestion, index) => (
-          //     <button
-          //       key={index}
-          //       onClick={() => handleSuggestionClick(suggestion.title + " " + suggestion.subtitle)}
-          //       className="message-bot bubble font-semibold py-2 px-4 shadow-sm hover:message-bot transition ease-in-out duration-150 w-full text-left"
-          //     >
-          //       {suggestion.title}
-          //       <div className="text-gray-500 text-sm">
-          //         {suggestion.subtitle}
-          //       </div>
-          //     </button>
-          //   ))}
-          // </>
            <>
            <p className="text-gray-900 font-bold mb-4">{t?.("chat_title")}</p>
            {suggestions.map((suggestion, index) => (
@@ -222,26 +258,25 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate }) 
          </>
         ) : (
           messages.map((message, index) => (
-            <div
-              key={index}
-              className={`break-words p-3 rounded-lg bubble mb-2 ${
-                message.sender === "user"
-                  ? "message-user bubble-right text-gray-800 align-left"
-                  : "message-bot text-white align-right"
-              }`}
-            >
-              {message.content}
+
+            <div key={index} className={`break-words p-3 rounded-lg bubble mb-2 ${message.sender === "user" ? "message-user bubble-right text-gray-800 align-left" : "message-bot text-white align-right"} ${message.category ? "category-message" : ""}`}>
+              {message.category ? (
+                <button onClick={() => message.category && handleCategoryClick(message.category)} className="category-button">
+                  {message.content}
+                </button>
+              ) : (
+                message.content
+              )}
             </div>
           ))
         )}
         {isBotThinking && (
-          <div className="break-words p-3 message-bot bubble text-white align-right rounded-lg mb-2">
-            {/* {t?.("chat_loading")} */}
-            <div className="chat-message-loader">
+            <div className="loading-container">
               <div className="loader"></div>
+              <p>Loading...</p>
             </div>
-          </div>
-        )}
+          )}
+
         <div ref={messagesEndRef} />
       </div>
 
