@@ -192,7 +192,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
         addBotMessage(message);
       }
       setIsBotThinking(false);
-    }, 1500);
+    }, 500);
   };
 
   const addBotMessage = (message: string) => {
@@ -230,7 +230,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
     if (isBotThinking) {
       const timer = setTimeout(() => {
         setIsBotThinking(false);
-      }, 2000);
+      }, 4000);
 
       return () => clearTimeout(timer);
     }
