@@ -4,31 +4,44 @@ import { Product } from '@/types/Product';
 import { Category } from '@/types/Category';
 
 interface CategoryProps {
-  label: string;
+  category: Category;
+  selectedCategories?: Category[];
+  setSelectedCategories?: (categories: Category[]) => void;
 }
 
 interface BackCategoryProps {
   label: string;
   onProductsUpdate?: (products: Product[]) => void;
+  onCategoriesUpdate?: (categories: Category[]) => void;
 }
 
 interface NotFoundProps {
   onProductsUpdate?: (products: Product[]) => void;
   categories: Category[];
+  onCategoriesUpdate?: (categories: Category[]) => void;
+  selectedCategories?: Category[];
+  setSelectedCategories?: (categories: Category[]) => void;
 }
-
-const CategoryButton: React.FC<CategoryProps> = ({ label }) => {
+const CategoryButton: React.FC<CategoryProps> = ({ category, selectedCategories, setSelectedCategories }) => {
   return (
-    <button className="category-button">
-      {label}
+    <button className="category-button" onClick={() => {
+      if (selectedCategories && selectedCategories?.length > 2) {
+        window.open(category.amazon_url, '_blank');
+      } else {
+        if (setSelectedCategories) {
+          setSelectedCategories([...(selectedCategories ?? []), category]);
+        }
+      }
+    }}>
+      {category.name}
     </button>
   );
 };
 
-const BackToChatButton: React.FC<BackCategoryProps> = ({ label, onProductsUpdate }) => {
+const BackToChatButton: React.FC<BackCategoryProps> = ({ label, onProductsUpdate, onCategoriesUpdate }) => {
   const handleResetProductSelect = () => {
-      if (onProductsUpdate) {
-          onProductsUpdate([]);
+      if (onCategoriesUpdate) {
+        onCategoriesUpdate([]);
       }
   };
 
@@ -39,10 +52,9 @@ const BackToChatButton: React.FC<BackCategoryProps> = ({ label, onProductsUpdate
   );
 };
 
-const NotFound: React.FC<NotFoundProps> = ({ onProductsUpdate, categories }) => {
+const NotFound: React.FC<NotFoundProps> = ({ onProductsUpdate, categories, onCategoriesUpdate, selectedCategories, setSelectedCategories }) => {
   const { t } = useTranslation();
 
-  console.log(categories)
   return (
     <div className="not-found-container">
       <h1 className="not-found-header">{t('pick_categories_header')}</h1>
@@ -53,13 +65,13 @@ const NotFound: React.FC<NotFoundProps> = ({ onProductsUpdate, categories }) => 
             {categories?.length > 0 && categories.map((category, index) => (
                 
                 <div key={index}>
-                   <CategoryButton label={category.name} />
+                   <CategoryButton category={category} selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} />
                 </div>
 
             ))}
       </div>
       <p className="not-found-subtext">{t('reset_subtext')}</p>
-      <BackToChatButton label={t('reset_chat')} onProductsUpdate={onProductsUpdate} />
+      <BackToChatButton label={t('reset_chat')} onProductsUpdate={onProductsUpdate} onCategoriesUpdate={onCategoriesUpdate} />
     </div>
   );
 };

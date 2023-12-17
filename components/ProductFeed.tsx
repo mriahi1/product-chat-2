@@ -9,9 +9,12 @@ interface FeaturedProductsFeedProps {
     products: Product[];
     categories: Category[];
     onProductsUpdate?: (products: Product[]) => void;
+    onCategoriesUpdate?: (categories: Category[]) => void;
+    selectedCategories?: Category[];
+    setSelectedCategories?: (categories: Category[]) => void;
 }
 
-const FeaturedProductsFeed: React.FC<FeaturedProductsFeedProps> = ({ products, categories, onProductsUpdate }) => {
+const FeaturedProductsFeed: React.FC<FeaturedProductsFeedProps> = ({ products, categories, onProductsUpdate, onCategoriesUpdate, selectedCategories, setSelectedCategories }) => {
     const { t } = useTranslation();
 
     if (!products || products.length === 0) {
@@ -25,7 +28,7 @@ const FeaturedProductsFeed: React.FC<FeaturedProductsFeedProps> = ({ products, c
                     <FeaturedProduct {...product} />
                 </div>
             ))}
-            <ResetChat onProductsUpdate={onProductsUpdate} categories={categories} />
+            <ResetChat onProductsUpdate={onProductsUpdate} categories={categories} onCategoriesUpdate={onCategoriesUpdate} selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} />
         </div>
     );
 };

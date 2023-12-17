@@ -19,6 +19,8 @@ const Home: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -38,6 +40,8 @@ const Home: React.FC = () => {
     setCategories(categories);
   }
 
+  // console.log('selectedCategories pages', selectedCategories)
+
   return (
     <TranslationProvider>
 
@@ -53,7 +57,7 @@ const Home: React.FC = () => {
         <main
           className={`page-section flex flex-col md:flex-row`}
         >
-          {products && products.length > 0 ? (
+          {categories && categories.length > 0 ? (
             <>
               <aside className="w-full md:w-4/12 h-full">
                 <GettingStarted step={2} />
@@ -61,7 +65,13 @@ const Home: React.FC = () => {
 
               <section className="w-full md:w-8/12">
                 {/* <FeaturedProduct {...selectedProduct} /> */}
-                <ProductFeed products={products} categories={categories} onProductsUpdate={updateProducts} />
+                <ProductFeed 
+                  products={products} 
+                  categories={categories} 
+                  onProductsUpdate={updateProducts} 
+                  onCategoriesUpdate={updateCategories}
+                  selectedCategories={selectedCategories}
+                  setSelectedCategories={setSelectedCategories} />
               </section>
             </>
           ) : (
@@ -74,7 +84,7 @@ const Home: React.FC = () => {
                   onProductSelect={updateSelectedProduct}
                   onProductsUpdate={updateProducts}
                   onCategoriesUpdate={updateCategories}
-
+                  selectedCategories={selectedCategories}
                 />
 
               </aside>
