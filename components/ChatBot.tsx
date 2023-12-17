@@ -17,6 +17,8 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
   const [inputMessage, setInputMessage] = useState("");
   const [isBotThinking, setIsBotThinking] = useState(false);
   const [selectionCount, setSelectionCount] = useState(0);
+  const [selectedSearchCategories, setSelectedSearchCategories] = useState<Category[]>([]);
+  const [searchPrompt, setSearchPrompt] = useState<string>("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
 
@@ -52,7 +54,8 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
       window.open(category.amazon_url, '_blank');
     } else {
       setSelectionCount(prevCount => prevCount + 1);
-      performSearch(category.name);
+      // performSearch(category.name);
+      setSelectedSearchCategories(prevCategories => [...prevCategories, category]);
     }
   };
 
@@ -135,6 +138,13 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
     sendMessage(searchTerm);
     setInputMessage("");
 
+    let apiSearchPrompt = searchPrompt;
+
+    if (!searchPrompt.includes(searchTerm)) {
+      apiSearchPrompt = searchPrompt + "+" + searchTerm
+      setSearchPrompt(apiSearchPrompt);
+    }
+
     // let product: any;
     // let products: any;
     let message: any;
@@ -143,7 +153,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
 
     if (true || messages.length > 0) {
       if (chatBotConfig.useApi) {
-        responseData = await fetchApiData(searchTerm);
+        responseData = await fetchApiData(apiSearchPrompt);
         if (responseData.category.length !== 0) {
 
           categories = responseData.category
@@ -177,7 +187,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
       message = t("could_you_be_more_specific")
     }
 
-    // console.log('searchTerm', searchTerm, messages, message, categories, responseData)
+    // console.log('searchTerm', apiSearchPrompt, responseData)
   
     setTimeout(() => {
       if (responseData) {
@@ -207,13 +217,15 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
   };
 
   useEffect(() => {
-    if (selectedCategories && selectedCategories.length > 0) {
-      const categoryNames = selectedCategories.map((category: Category) => category.name).join("+");
+    if (selectedSearchCategories && selectedSearchCategories.length > 0) {
+      const categoryNames = selectedSearchCategories.map((category: Category) => category.name).join("+");
       
-      const newSearchTerm = `${inputMessage} +${categoryNames}`.trim();
-      performSearch(newSearchTerm);
+      const newSearchTerm = `${searchPrompt} +${categoryNames}`.trim();
+
+      setSearchPrompt(newSearchTerm);
+      performSearch(selectedSearchCategories[selectedSearchCategories.length - 1].name);
     }
-  }, [selectedCategories]);
+  }, [selectedSearchCategories]);
 
 
   // const handleSuggestionClick = (suggestion: string) => {
