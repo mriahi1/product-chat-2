@@ -39,6 +39,11 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
 
   const addBotCategoryMessages = (categories: Category[]) => {
 
+    setMessages(prevMessages => [
+      ...prevMessages,
+      { sender: "bot", content: t("new_categories_found")}
+    ]);
+
     const topThreeCategories = categories.slice(0, 3);
     const categoryMessages: ChatMessage[] = topThreeCategories.map(category => ({
       sender: "bot",
