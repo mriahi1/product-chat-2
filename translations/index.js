@@ -124,7 +124,7 @@ const en = {
     affiliation_mention_contract: "En tant que Partenaire Amazon, ce site réalise un bénéfice sur les achats remplissant les conditions requises.",
     cookie_notice: "Ce site utilise des cookies pour améliorer l'expérience utilisateur.",
     hello: "Bonjour,",
-    what_are_you_looking_for: "Bonjour ! Que cherchez-vous aujourd'hui? N'hésitez pas à être le plus précis possible afin que je puisse vous aider au mieux :)",
+    what_are_you_looking_for: "Bonjour ! Que cherchez-vous aujourd'hui ? N'hésitez pas à être le plus précis possible afin que je puisse vous aider au mieux :)",
     support_text_1: "FETCHIZY, VOTRE COMPAGNON SHOPPING DE POCHE",
     could_you_be_more_specific: "Pouvez-vous me donner plus de détails ?",
     support_text_2: "SCROLLEZ POUR DECOUVRIR NOTRE SELECTION",
