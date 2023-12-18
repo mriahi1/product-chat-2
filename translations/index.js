@@ -53,7 +53,7 @@ const en = {
     affiliation_mention_contract: "As an Amazon Associate, this website earn from qualifying purchases.",
     cookie_notice: "This website uses cookies to enhance the user experience.",
     hello: "Hello,",
-    what_are_you_looking_for: "what are you looking for today?",
+    what_are_you_looking_for: "Hello! What are you looking for today? Please be as specific as possible so that I can help you as best as I can :)",
     support_text_1: "FETCHIZY, YOUR POCKET SHOPPING COMPANION",
     could_you_be_more_specific: "Could you be more specific?",
     support_text_2: "SCROLL TO DISCOVER OUR SELECTION",
@@ -124,7 +124,7 @@ const en = {
     affiliation_mention_contract: "En tant que Partenaire Amazon, ce site réalise un bénéfice sur les achats remplissant les conditions requises.",
     cookie_notice: "Ce site utilise des cookies pour améliorer l'expérience utilisateur.",
     hello: "Bonjour,",
-    what_are_you_looking_for: "que cherchez-vous aujourd'hui?",
+    what_are_you_looking_for: "Bonjour ! Que cherchez-vous aujourd'hui? N'hésitez pas à être le plus précis possible afin que je puisse vous aider au mieux :)",
     support_text_1: "FETCHIZY, VOTRE COMPAGNON SHOPPING DE POCHE",
     could_you_be_more_specific: "Pouvez-vous me donner plus de détails ?",
     support_text_2: "SCROLLEZ POUR DECOUVRIR NOTRE SELECTION",
@@ -135,7 +135,7 @@ const en = {
     cat_2: "Vêtements",
     reset_subtext: "Sinon, vous pouvez retourner au chat",
     reset_chat: "Retour au Chat",
-    new_categories_found: "Voici des catégories qui pourraient vous plaire"
+    new_categories_found: "Voici des catégories qui pourraient vpous intéresser..."
   };
 //   export default fr;
 
