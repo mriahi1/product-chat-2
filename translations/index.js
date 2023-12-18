@@ -64,7 +64,7 @@ const en = {
     cat_2: "Clothing",
     reset_subtext: "Otherwise, you can go back to the chat",
     reset_chat: "Back to the Chat",
-    new_categories_found: "Here are categories you might like"
+    new_categories_found: "Here are categories you might like..."
 
   };
 //   export default en;
@@ -135,7 +135,7 @@ const en = {
     cat_2: "Vêtements",
     reset_subtext: "Sinon, vous pouvez retourner au chat",
     reset_chat: "Retour au Chat",
-    new_categories_found: "Voici des catégories qui pourraient vpous intéresser..."
+    new_categories_found: "Voici des catégories qui pourraient vous intéresser..."
   };
 //   export default fr;
 
