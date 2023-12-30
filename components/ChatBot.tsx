@@ -141,7 +141,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
       return await response.json();
     } catch (error) {
       console.error('Error fetching from API:', error);
-      return null;
+      return String("Could you please provide more information or context about your needs so that I can accurately identify the most relevant product for you?");
     }
   };
   
