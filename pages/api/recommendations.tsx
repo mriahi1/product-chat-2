@@ -10,7 +10,9 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
 
-  const externalApiResponse = await fetch(chatBotConfig.apiUrl + "/recommendation", {
+  const API_URL = process.env.NODE_ENV === 'production' ? chatBotConfig.apiUrl : chatBotConfig.stagingUrl;
+
+  const externalApiResponse = await fetch(API_URL + "/recommendation", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
