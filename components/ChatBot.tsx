@@ -55,7 +55,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
   };
 
   const handleCategoryClick = (category: Category) => {
-    if (selectionCount >= 2) {
+    if (selectionCount >= 1) {
       window.open(category.amazon_url, '_blank');
     } else {
       setSelectionCount(prevCount => prevCount + 1);
@@ -117,7 +117,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
     setIsBotThinking(true);
   };
 
-  const fetchApiData = async (searchTerm: string) => {
+  const fetchApiData = async (searchTerm: string, actionType: string) => {
     try {
       // /api/recommendations
       const response = await fetch(`/api/categories`, {
@@ -125,7 +125,14 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: searchTerm }),
+        body: JSON.stringify({
+          prompt: {
+            prompt: searchTerm
+          },
+          prompt_type: {
+            prompt_type: actionType
+          }
+        }),
       });
   
       if (!response.ok) {
@@ -138,7 +145,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
     }
   };
   
-  const performSearch = async (searchTerm: string) => {
+  const performSearch = async (searchTerm: string, actionType: string) => {
     setIsBotThinking(true);
     sendMessage(searchTerm);
     setInputMessage("");
@@ -146,7 +153,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
     let apiSearchPrompt = searchPrompt;
 
     if (!searchPrompt.includes(searchTerm)) {
-      apiSearchPrompt = searchPrompt + "+" + searchTerm
+      apiSearchPrompt = searchTerm
       setSearchPrompt(apiSearchPrompt);
     }
 
@@ -158,7 +165,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
 
     if (true || messages.length > 0) {
       if (chatBotConfig.useApi) {
-        responseData = await fetchApiData(apiSearchPrompt);
+        responseData = await fetchApiData(apiSearchPrompt, actionType);
         if (responseData.category.length !== 0) {
 
           categories = responseData.category
@@ -218,7 +225,8 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
   };
 
   const handleSendMessage = () => {
-    performSearch(inputMessage);
+    setSelectionCount(0);
+    performSearch(inputMessage, "prompt");
   };
 
   useEffect(() => {
@@ -228,7 +236,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
       const newSearchTerm = `${searchPrompt} +${categoryNames}`.trim();
 
       setSearchPrompt(newSearchTerm);
-      performSearch(selectedSearchCategories[selectedSearchCategories.length - 1].name);
+      performSearch(selectedSearchCategories[selectedSearchCategories.length - 1].name, "category");
     }
   }, [selectedSearchCategories]);
 
@@ -338,4 +346,3 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
 };
 
 export default ChatBot;
-
