@@ -44,8 +44,8 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductSelect, onProductsUpdate, on
       { sender: "bot", content: t("new_categories_found")}
     ]);
 
-    const topThreeCategories = categories.slice(0, 3);
-    const categoryMessages: ChatMessage[] = topThreeCategories.map(category => ({
+    const topFiveCategories = categories.slice(0, 5);
+    const categoryMessages: ChatMessage[] = topFiveCategories.map(category => ({
       sender: "bot",
       content: category.name,
       category: category
