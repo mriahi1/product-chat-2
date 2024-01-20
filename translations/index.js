@@ -64,8 +64,9 @@ const en = {
     cat_2: "Clothing",
     reset_subtext: "Otherwise, you can go back to the chat",
     reset_chat: "Back to the Chat",
-    new_categories_found: "Here are categories you might like..."
-
+    new_categories_found: "Here are categories you might like...",
+    error_message_network: "Network error. Please try again later.",
+    error_message_generic: "An error occurred. Please try again later.",
   };
 //   export default en;
   
@@ -135,7 +136,9 @@ const en = {
     cat_2: "Vêtements",
     reset_subtext: "Sinon, vous pouvez retourner au chat",
     reset_chat: "Retour au Chat",
-    new_categories_found: "Voici des catégories qui pourraient vous intéresser..."
+    new_categories_found: "Voici des catégories qui pourraient vous intéresser...",
+    error_message_network: "Erreur réseau. Veuillez réessayer plus tard.",
+    error_message_generic: "Une erreur est survenue. Veuillez réessayer plus tard.",
   };
 //   export default fr;
 
