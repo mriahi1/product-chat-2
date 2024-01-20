@@ -66,14 +66,12 @@ const ChatBot: React.FC<ChatBotProps> = ({
       { sender: "bot", content: t("new_categories_found") },
     ]);
 
-    const topThreeCategories = categories.slice(0, 3);
-    const categoryMessages: ChatMessage[] = topThreeCategories.map(
-      (category) => ({
-        sender: "bot",
-        content: category.name,
-        category: category,
-      })
-    );
+    const topFiveCategories = categories.slice(0, 5);
+    const categoryMessages: ChatMessage[] = topFiveCategories.map(category => ({
+      sender: "bot",
+      content: category.name,
+      category: category
+    }));
 
     setMessages((prevMessages) => [...prevMessages, ...categoryMessages]);
   };
