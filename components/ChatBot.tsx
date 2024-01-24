@@ -156,7 +156,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
         },
         body: JSON.stringify(
           {
-            sessionId: sessionId,
+            request_id: sessionId,
             issuer_id: chatBotConfig.issuerId,
             request_type: "category",
             parameters: {
@@ -167,7 +167,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
       });
 
       if (!response.ok) {
-        throw new Error("API response not ok");
+        throw new Error("API response: not ok");
       }
       return await response.json();
     } catch (error) {
