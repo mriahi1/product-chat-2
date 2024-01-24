@@ -154,19 +154,20 @@ const ChatBot: React.FC<ChatBotProps> = ({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          sessionId: sessionId,
-          prompt: {
-            prompt: searchTerm,
-          },
-          prompt_type: {
-            prompt_type: actionType,
-          },
-        }),
+        body: JSON.stringify(
+          {
+            request_id: sessionId,
+            issuer_id: chatBotConfig.issuerId,
+            request_type: "category",
+            parameters: {
+              user_prompt: searchTerm,
+              prompt_type: actionType
+            }
+          }),
       });
 
       if (!response.ok) {
-        throw new Error("API response not ok");
+        throw new Error("API response: not ok");
       }
       return await response.json();
     } catch (error) {
@@ -321,11 +322,10 @@ const ChatBot: React.FC<ChatBotProps> = ({
               {messages.map((message, index) => (
                 <div
                   key={index}
-                  className={`break-words p-3 rounded-lg bubble mb-2 ${
-                    message.sender === "user"
+                  className={`break-words p-3 rounded-lg bubble mb-2 ${message.sender === "user"
                       ? "message-content message-user bubble-right text-gray-800 align-left"
                       : "message-content message-bot text-white align-right"
-                  } ${message.category ? "category-message" : ""}`}
+                    } ${message.category ? "category-message" : ""}`}
                 >
                   {message.category ? (
                     <button
