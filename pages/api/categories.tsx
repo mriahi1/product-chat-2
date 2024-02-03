@@ -10,7 +10,14 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
 
-  const API_URL = process.env.NODE_ENV === 'production' ? chatBotConfig.apiUrl : chatBotConfig.stagingUrl;
+  let API_URL;
+  if (process.env.NODE_ENV === 'production') {
+    API_URL = chatBotConfig.apiUrl;
+  } else if (process.env.NODE_ENV === 'development') {
+    API_URL = chatBotConfig.stagingUrl;
+  } else if (process.env.NODE_ENV === 'test') {
+    API_URL = chatBotConfig.testingUrl;
+  }
 
   const externalApiResponse = await fetch(API_URL + '/category', {
     method: 'POST',
@@ -20,6 +27,7 @@ export default async function handler(
     body: JSON.stringify(req.body),
   });
 
+  // console.log("API_URL", API_URL)
   // console.log("externalApiResponse", externalApiResponse)
 
   if (!externalApiResponse.ok) {

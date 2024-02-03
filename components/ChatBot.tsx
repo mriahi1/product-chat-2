@@ -279,7 +279,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
     if (isBotThinking) {
       const timer = setTimeout(() => {
         setIsBotThinking(false);
-      }, 4000);
+      }, 5000);
 
       return () => clearTimeout(timer);
     }
@@ -307,13 +307,15 @@ const ChatBot: React.FC<ChatBotProps> = ({
                     {suggestion.title} {suggestion.subtitle}
                   </div>
                 ) : (
-                  <button
-                    key={index}
-                    onClick={() => handleSuggestionClick(suggestion)}
-                    className={`suggestion-button break-words p-3 rounded-lg text-gray-500 align-right mb-2`}
-                  >
-                    {suggestion.title} {suggestion.subtitle}
-                  </button>
+                  <div key={`key_div_${index}`}>
+                    <button
+                      key={index}
+                      onClick={() => handleSuggestionClick(suggestion)}
+                      className={`suggestion-button break-words p-3 rounded-lg text-gray-500 align-right mb-2`}
+                    >
+                      {suggestion.title} {suggestion.subtitle}
+                    </button>
+                  </div>
                 )
               )}
             </>
@@ -323,8 +325,8 @@ const ChatBot: React.FC<ChatBotProps> = ({
                 <div
                   key={index}
                   className={`break-words p-3 rounded-lg bubble mb-2 ${message.sender === "user"
-                      ? "message-content message-user bubble-right text-gray-800 align-left"
-                      : "message-content message-bot text-white align-right"
+                    ? "message-content message-user bubble-right text-gray-800 align-left"
+                    : "message-content message-bot text-white align-right"
                     } ${message.category ? "category-message" : ""}`}
                 >
                   {message.category ? (
