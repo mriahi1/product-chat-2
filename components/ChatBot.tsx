@@ -46,9 +46,9 @@ const ChatBot: React.FC<ChatBotProps> = ({
 
   const suggestions = [
     { title: t("hello"), subtitle: t("what_are_you_looking_for") },
-    { title: t("find_me"), subtitle: t("for_my_dog") },
-    { title: t("find_a_deal"), subtitle: t("for_iphone_earphones") },
-    { title: t("i_need"), subtitle: t("an_iphone_charger") },
+    { title: t("prompt1_title"), subtitle: t("prompt1_sub") },
+    { title: t("prompt2_title"), subtitle: t("prompt2_sub") },
+    { title: t("prompt3_title"), subtitle: t("prompt3_sub") },
     // ... add more suggestions as needed
   ];
 
