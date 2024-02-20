@@ -6,3 +6,7 @@ export const chatBotConfig = {
     issuerId: "grj-lmb-4bde-4aa1-903b-9ad5d14d6cc7"
   };
   
+export const googleTagManagerConfig = {
+    gtmId: "GTM-52HVPQQR",
+    stagingGtmId: "GTM-KRC9VKZG",
+  };
