@@ -13,15 +13,11 @@ interface ChatBotProps {
 }
 
 const generateSessionId = () => {
-  // Simple unique ID generator - replace with your preferred method
-  return 'session_' + Math.random().toString(36).substr(2, 9);
+  return 'session_' + Math.random().toString(36).substring(2, 11);
 };
 
 const ChatBot: React.FC<ChatBotProps> = ({
-  onProductSelect,
   onProductsUpdate,
-  onCategoriesUpdate,
-  selectedCategories,
 }) => {
   const [sessionId, setSessionId] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -49,7 +45,6 @@ const ChatBot: React.FC<ChatBotProps> = ({
     { title: t("prompt1_title"), subtitle: t("prompt1_sub") },
     { title: t("prompt2_title"), subtitle: t("prompt2_sub") },
     { title: t("prompt3_title"), subtitle: t("prompt3_sub") },
-    // ... add more suggestions as needed
   ];
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -81,7 +76,6 @@ const ChatBot: React.FC<ChatBotProps> = ({
       window.open(category.amazon_url, "_blank");
     } else {
       setSelectionCount((prevCount) => prevCount + 1);
-      // performSearch(category.name);
       setSelectedSearchCategories((prevCategories) => [
         ...prevCategories,
         category,
@@ -93,8 +87,6 @@ const ChatBot: React.FC<ChatBotProps> = ({
     if (onProductsUpdate) {
       setMessages([]);
       onProductsUpdate([]);
-      // onProductSelect([]);
-      // onProductSelect();
     }
   };
 
@@ -363,7 +355,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
             className="message-input"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
             maxLength={120}
           />
           <button onClick={handleSendMessage} className="send-button">
@@ -383,12 +375,13 @@ const ChatBot: React.FC<ChatBotProps> = ({
       </div>
 
       {messages?.length > 1 && (
-        <p
+        <button
           onClick={handleResetProductSelect}
+          onKeyDown={handleKeyPress}
           className="flex-none text-gray-500 p-2 focus:outline-none reset-button"
         >
           {t?.("start_over")}
-        </p>
+        </button>
       )}
     </>
   );

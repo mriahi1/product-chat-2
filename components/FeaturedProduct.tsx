@@ -19,7 +19,6 @@ interface FeaturedProductProps {
 const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
   const [product, setProduct] = useState<Product>({} as Product);
   const [selectedImage, setSelectedImage] = useState<string>("");
-  // const [currency, setCurrency] = useState("€");
 
   const { t } = useTranslation();
 
@@ -27,10 +26,6 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
     setSelectedImage(props?.images[0]);
     setProduct(props);
   }, [props]);
-
-  // const handleThumbnailClick = (image: string) => {
-  //   setSelectedImage(image);
-  // };
 
   const {
     id,
@@ -49,30 +44,6 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
   if (!product || !product?.images) {
     return <div>{t?.("loading_product")}</div>;
   }
-
-  // const renderRating = (
-  //   value: number,
-  //   icon: string,
-  //   color: { active: string; inactive: string }
-  // ) => (
-  //   <>
-  //     <div className="flex items-center mr-4">{value.toFixed(1)}</div>
-  //     <div className="flex justify-between items-center w-full">
-  //       <div className="flex items-center">
-  //         {[...Array(5)].map((_, index) => (
-  //           <span
-  //             key={index}
-  //             className={`text-xl ${
-  //               index < Math.round(value) ? color.active : color.inactive
-  //             }`}
-  //           >
-  //             {icon}
-  //           </span>
-  //         ))}
-  //       </div>
-  //     </div>
-  //   </>
-  // );
 
   function truncateText(text: string, maxLength: number): string {
     if (text.length > maxLength) {
