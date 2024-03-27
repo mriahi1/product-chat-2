@@ -67,9 +67,18 @@ const en = {
     new_categories_found: "Here are categories you might like... you can also formulate another request in the chat box",
     error_message_network: "Network error. Please try again later.",
     error_message_generic: "An error occurred. Please try again later.",
+    hero_title: "Welcome to FETCHIZY",
+    hero_subtitle: "Your pocket shopping companion",
+    hero_cta_button: "Try out the app",
+    blog: "Blog",
+    chat: "Chat",
+    read_more: "Read more",
+    featured_stories: "Featured Stories",
+    footer_cta_title: "Ready to try Fetchizy?",
+    footer_cta_subtitle: "Start chatting now to shopping smarter!",
+    footer_cta_button: "Start chatting",
   };
-//   export default en;
-  
+
   // fr.js
   const fr = {
     loading: "Chargement des détails du produit...",
@@ -139,11 +148,17 @@ const en = {
     new_categories_found: "Voici des catégories qui pourraient vous intéresser... vous pouvez également m'écrire une nouvelle demande",
     error_message_network: "Erreur réseau. Veuillez réessayer plus tard.",
     error_message_generic: "Une erreur est survenue. Veuillez réessayer plus tard.",
+    hero_title: "Bienvenue sur FETCHIZY",
+    hero_subtitle: "Votre compagnon shopping de poche",
+    hero_cta_button: "Essayez l'application",
+    blog: "Blog",
+    chat: "Chat",
+    read_more: "Lire la suite",
+    featured_stories: "Articles en vedette",
+    footer_cta_title: "Prêt à essayer Fetchizy ?",
+    footer_cta_subtitle: "Commencez à discuter maintenant pour faire des achats plus intelligents !",
+    footer_cta_button: "Commencer à discuter",
   };
-//   export default fr;
-
-// import en from './en';
-// import fr from './fr';
 
 const translations = { en, fr };
 export default translations;

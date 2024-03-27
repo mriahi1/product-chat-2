@@ -4,16 +4,12 @@ import { useTranslation } from "@/contexts/TranslationsContext";
 import Link from 'next/link';
 
 interface HeaderProps {
-  // Define any props here if needed
+
 }
 
 const Header: React.FC<HeaderProps> = () => {
   const { t, language, setLanguage } = useTranslation();
   const [showSignupModal, setShowSignupModal] = useState<boolean>(false);
-
-  const handleProfileClick = () => {
-    setShowSignupModal(true);
-  };
 
   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setLanguage(event.target.value);
@@ -24,11 +20,17 @@ const Header: React.FC<HeaderProps> = () => {
 <header className="fixed top-0 left-0 right-0 z-10 flex justify-between items-center p-4 h-16" style={{ backgroundColor: '#F3FFF2' }}>
   <div className="logo">
     <Link href="/">
-      <img src={"LOGO_FETCHIZY.png"} alt="" className="h-12 rounded ml-4" />
+      <img src={"/LOGO_FETCHIZY.png"} alt="" className="h-12 rounded ml-4" />
     </Link>
   </div>
 
   <div className="flex items-center">
+    <Link href="/" className="blog-btn">
+      <h1 className="mr-4">{t?.('blog')}</h1>
+    </Link>
+    <Link href="/chat" className="chat-btn">
+      <h1 className="mr-4">{t?.('chat')}</h1>
+    </Link>
     <Link href="/about" className="about-btn">
       <h1 className="mr-4">{t?.('about_mention')}</h1>
     </Link>

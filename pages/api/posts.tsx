@@ -19,12 +19,11 @@ export default async function handler(
     API_URL = chatBotConfig.testingUrl;
   }
 
-  const externalApiResponse = await fetch(API_URL + '/category', {
-    method: 'POST',
+  const externalApiResponse = await fetch(API_URL + '/posts', {
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(req.body),
   });
 
   if (!externalApiResponse.ok) {
