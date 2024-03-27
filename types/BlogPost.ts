@@ -1,5 +1,5 @@
 interface BlogPost {
-    id: number;
+    Posts_id: number;
     title: string;
     summary: string;
     imageUrl: string;

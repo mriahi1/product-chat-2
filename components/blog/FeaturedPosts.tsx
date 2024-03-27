@@ -10,27 +10,27 @@ const FeaturedPosts = () => {
 
   useEffect(() => {
     const fetchBlogPosts = async () => {  
-      fetchApiData().then((data) => setPosts(data));
+      fetchApiData().then((data) => setPosts(data?.posts));
     };
 
     fetchBlogPosts();
   }, []);
 
   const fetchApiData = async () => {
-    const USE_MOCK_DATA = true;
+    const USE_MOCK_DATA = false;
     if (USE_MOCK_DATA) {
 
       // Mock data with 800 word content
       const blogPosts: BlogPost[] = [
         {
-          id: 1,
+          Posts_id: 1,
           title: 'Post Title 1',
           summary: 'Post summary 1',
           content: "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
           imageUrl: 'https://via.placeholder.com/600',
         },
         {
-          id: 2,
+          Posts_id: 2,
           title: 'Post Title 2',
           summary: 'Post summary 2',
           content: "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
@@ -46,8 +46,6 @@ const FeaturedPosts = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(
-          {}),
       });
 
       if (!response.ok) {
@@ -65,13 +63,17 @@ const FeaturedPosts = () => {
     <>
       <h2 className="section-header">{t?.('featured_stories')}</h2>
       <div className="featured-posts">
-        {posts.map((post) => (
-          <div key={post.id} className="post">
-            <img src={post.imageUrl} alt={post.title} className="post-image" />
+        {posts?.map((post) => (
+          <div key={post.Posts_id} className="post">
+            {post.imageUrl && (
+              <img src={post.imageUrl} alt={post.title} className="post-image" />
+            )}
             <div className="post-details">
               <h2 className="title">{post.title}</h2>
-                <p className="intro-text">{post.content.length > 200 ? `${post.content.substring(0, 200)}...` : post.content}</p>
-              <Link href={`/blog/${post.id}`} className="read-more">
+              <p className="intro-text">
+                {post.content.length > 200 ? `${post.content.substring(0, 200)}...` : post.content}
+              </p>
+              <Link href={`/blog/${post.Posts_id}`} className="read-more">
                 {t?.('read_more')}
               </Link>
             </div>

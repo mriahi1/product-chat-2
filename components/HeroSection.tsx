@@ -8,7 +8,7 @@ const HeroSection = () => {
 
     return (
         <div className="hero-section">
-            <img src={"LOGO_FETCHIZY_BASELINE.png"} alt="Logo" />
+            <img src={"/LOGO_FETCHIZY_BASELINE.png"} alt="Logo" />
             {/* <h1>{t?.('hero_title')}</h1> */}
             {/* <p>{t?.('hero_subtitle')}</p> */}
             <Link href="/chat" className="cta-btn">

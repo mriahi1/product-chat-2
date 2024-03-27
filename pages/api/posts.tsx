@@ -20,11 +20,10 @@ export default async function handler(
   }
 
   const externalApiResponse = await fetch(API_URL + '/posts', {
-    method: 'POST',
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(req.body),
   });
 
   if (!externalApiResponse.ok) {

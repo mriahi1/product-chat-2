@@ -180,8 +180,6 @@ const ChatBot: React.FC<ChatBotProps> = ({
       setSearchPrompt(apiSearchPrompt);
     }
 
-    // let product: any;
-    // let products: any;
     let message: any;
     let categories: any;
     let responseData: any;

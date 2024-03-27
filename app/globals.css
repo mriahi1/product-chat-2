@@ -875,7 +875,7 @@ svg {
 
 /* BLOG POST DETAIL */
 
-.blog-post {
+.blog-post, .blog-post-detail {
   background-color: #ffffff;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -890,5 +890,10 @@ svg {
 
 .blog-post p {
   color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+.blog-post-detail h1 {
+  font-size: 2rem;
   margin-bottom: 1rem;
 }

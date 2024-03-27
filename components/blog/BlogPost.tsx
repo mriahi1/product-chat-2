@@ -1,5 +1,5 @@
 import BlogPost from '@/types/BlogPost';
-import { useSearchParams } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import React, { useState, useEffect } from 'react';
 
 interface BlogPostProps {
@@ -7,25 +7,30 @@ interface BlogPostProps {
 
 const FullBlogPost: React.FC<BlogPostProps> = () => {
 
-    const searchParams = useSearchParams();
-    const postId = searchParams?.get('id') ?? '';
+    const postId = useParams()?.id;
     const [post, setPost] = useState<BlogPost>();
 
+    const fetchBlogPosts = async () => {  
+      const data = await fetchApiData();
+      const matchedPost = findPostById(data?.posts, postId);
+      setPost(matchedPost);
+    };
+
+    const findPostById = (posts: BlogPost[], id: any) => {
+      return posts.find((post: BlogPost) => post.Posts_id === id);
+    };
+
     useEffect(() => {
-      const fetchBlogPosts = async () => {  
-        fetchApiData().then((data) => setPost(data));
-      };
-  
       fetchBlogPosts();
     }, []);
   
     const fetchApiData = async () => {
-      const USE_MOCK_DATA = true;
+      const USE_MOCK_DATA = false;
       if (USE_MOCK_DATA) {
   
         // Mock data with 800 word content
         const post: BlogPost = {
-          id: 1,
+          Posts_id: 1,
           title: 'Post Title 1',
           summary: 'Post summary 1',
           content: "orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", 
@@ -35,13 +40,12 @@ const FullBlogPost: React.FC<BlogPostProps> = () => {
       }
   
       try {
-        const response = await fetch(`/api/posts/` + postId, {
+        // `/api/posts/` + postId
+        const response = await fetch(`/api/posts/`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(
-            {}),
         });
   
         if (!response.ok) {
@@ -55,10 +59,12 @@ const FullBlogPost: React.FC<BlogPostProps> = () => {
     };
 
   return (
-    <div className="blog-post">
+    <div className="blog-post-detail">
       {post && (
         <>
-          <img src={post.imageUrl} alt={post.title} />
+          {post.imageUrl && (
+            <img src={post.imageUrl} alt={post.title} />
+          )}
           <h1>{post.title}</h1>
           <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
         </>
