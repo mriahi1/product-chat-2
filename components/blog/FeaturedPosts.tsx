@@ -48,9 +48,8 @@ const FeaturedPosts = () => {
             <div className="post-details">
               <h2 className="title">{post.title}</h2>
               <p className="intro-text">
-                {post.content.length > 200 ? `${post.content.substring(0, 200)}...` : post.content}
+                {post.summary.length > 200 ? `${post.summary.substring(0, 200)}...` : post.summary}
               </p>
-              <div dangerouslySetInnerHTML={{ __html: post.content.length > 200 ? post.content.substring(0, 200) : post.content }}></div>
               <Link href={`/blog/${post.Posts_id}`} className="read-more">
                 {t?.('read_more')}
               </Link>
