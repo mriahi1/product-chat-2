@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import BlogPost from "@/types/BlogPost";
 import { useTranslation } from "@/contexts/TranslationsContext";
@@ -46,19 +45,21 @@ const FeaturedPosts = () => {
 
               {post.image_src && (
                 <Link href={`/blog/${post.Posts_id}`} className="read-more">
-                  <Image
+                  <img
+                    key={post.Posts_id}
                     src={post.image_src}
                     alt={post.title}
-                    width={500}
-                    height={500}
+                    className="post-image"
                   />
                 </Link>
               )}
+
               <div className="blog-post-detail__footer mt-2">
                 <span className="date">
                   <i>{new Date(post.date).toLocaleDateString()}</i>
                 </span>
               </div>
+
               <div className="mt-2">
                 <p className="intro-text">
                   {post.summary.length > 200

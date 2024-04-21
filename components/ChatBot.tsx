@@ -276,7 +276,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ onProductsUpdate }) => {
 
   return (
     <>
-      <div className={`chat-container component flex flex-col p-3`}>
+      <div className={`chat-container component flex flex-col p-3 mt-20`}>
         <div
           ref={chatContainerRef}
           className="overflow-y-auto p-3 space-y-2"

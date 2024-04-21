@@ -747,21 +747,33 @@ svg {
 }
 
 .post-image {
-  width: 100%;
+  width: 100%; /* Ensure image takes full width on smaller screens */
   height: auto;
   border-radius: 4px;
   object-fit: cover;
   margin-bottom: 0.5rem;
 }
 
-.post-details {
-  padding: 0;
+.title {
+  font-size: 1.3rem; /* Adjust size for better mobile readability */
+  font-weight: bold;
+  text-align: center; /* Center titles in the post for better alignment on mobile */
+  margin-bottom: 0.5rem;
+  padding: 0 10px; /* Add padding to handle edge-to-edge text on small screens */
 }
 
-.title {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+@media (max-width: 600px) {
+  .post {
+    grid-column: 1 / -1; /* Take full width in a grid layout */
+  }
+
+  .title {
+    font-size: 1.25rem; /* Smaller font for very small screens */
+  }
+}
+
+.post-details {
+  padding: 0;
 }
 
 .intro-text {
