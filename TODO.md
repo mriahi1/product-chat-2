@@ -1,6 +1,6 @@
 - handle load time for chat
 - make chat interactive
 - harmonize product image sizes (and fix eslint warnings)
-- mobile version landscape mode is broken*
+- mobile version landscape mode is broken\*
 - Lock language choice accross pages
 - add category recommendations

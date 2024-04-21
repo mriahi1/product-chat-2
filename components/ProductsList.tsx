@@ -1,7 +1,7 @@
 // components/ProductsList.tsx
-import React, { useState, useEffect } from 'react';
-import { Product } from '../types/Product';
-import { fetchProducts } from '../services/ApiService';
+import React, { useState, useEffect } from "react";
+import { Product } from "../types/Product";
+import { fetchProducts } from "../services/ApiService";
 
 const ProductsList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -21,7 +21,7 @@ const ProductsList: React.FC = () => {
 
   return (
     <div>
-      {products.map(product => (
+      {products.map((product) => (
         <div key={product.id}>
           <h2>{product.title}</h2>
           {/* Render other product details as needed */}

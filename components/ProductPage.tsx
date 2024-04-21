@@ -1,7 +1,7 @@
 // components/ProductPage.tsx
-import React from 'react';
-import { Product } from '@/types/Product';
-import { fetchProducts } from '@/services/ApiService';
+import React from "react";
+import { Product } from "@/types/Product";
+import { fetchProducts } from "@/services/ApiService";
 
 interface ProductPageProps {
   // Define any props here if needed
@@ -50,8 +50,10 @@ const ProductPage: React.FC<ProductPageProps> = () => {
     <div className="container mx-auto p-4">
       {/* Other UI elements */}
       <section aria-labelledby="products-heading">
-        <h2 id="products-heading" className="text-2xl font-bold mb-4">Products</h2>
-        {products.map(product => (
+        <h2 id="products-heading" className="text-2xl font-bold mb-4">
+          Products
+        </h2>
+        {products.map((product) => (
           <article key={product.id} className="mb-4 p-4 shadow-lg rounded-lg">
             <h3 className="text-xl font-semibold">{product.title}</h3>
             {/* More product details */}

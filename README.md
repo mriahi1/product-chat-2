@@ -35,7 +35,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-
 # Project Name
 
 Brief description of the project.
@@ -153,3 +152,4 @@ git checkout -b new_branch_name
 git add .
 git commit -m "added cookies and product feed"
 git push
+```

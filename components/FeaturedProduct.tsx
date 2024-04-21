@@ -47,12 +47,11 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
 
   function truncateText(text: string, maxLength: number): string {
     if (text.length > maxLength) {
-      return text.substring(0, maxLength) + '...';
+      return text.substring(0, maxLength) + "...";
     } else {
       return text;
     }
   }
-  
 
   return (
     <div className="featured-product">
@@ -63,10 +62,13 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
             <img src={images[0]} alt={title} className="image" />
           </div>
           <div className="details w-full md:w-1/2">
-            <div className="titleSection" style={{ display: "flex", justifyContent: "space-between" }}>
+            <div
+              className="titleSection"
+              style={{ display: "flex", justifyContent: "space-between" }}
+            >
               <div>
                 <h2 className="title">{truncateText(title, 50)}</h2>
-                <hr className="divider"/>
+                <hr className="divider" />
               </div>
               <div>
                 <p className="price">{price.toFixed(2)} €</p>

@@ -9,7 +9,6 @@ import { TranslationProvider } from "@/contexts/TranslationsContext";
 import GettingStarted from "@/components/GettingStarted";
 import Footer from "@/components/Footer";
 
-
 const Home: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
@@ -23,21 +22,18 @@ const Home: React.FC = () => {
 
   const updateProducts = (products: Product[]) => {
     setProducts(products);
-  }
+  };
 
   const updateCategories = (categories: Category[]) => {
     setCategories(categories);
-  }
+  };
 
   return (
     <TranslationProvider>
-
       <div className="container">
         <Header />
 
-        <main
-          className={`page-section flex flex-col md:flex-row`}
-        >
+        <main className={`page-section flex flex-col md:flex-row`}>
           {categories && categories.length > 0 ? (
             <>
               <aside className="w-full md:w-4/12 h-full">
@@ -45,13 +41,14 @@ const Home: React.FC = () => {
               </aside>
 
               <section className="w-full md:w-8/12">
-                <ProductFeed 
-                  products={products} 
-                  categories={categories} 
-                  onProductsUpdate={updateProducts} 
+                <ProductFeed
+                  products={products}
+                  categories={categories}
+                  onProductsUpdate={updateProducts}
                   onCategoriesUpdate={updateCategories}
                   selectedCategories={selectedCategories}
-                  setSelectedCategories={setSelectedCategories} />
+                  setSelectedCategories={setSelectedCategories}
+                />
               </section>
             </>
           ) : (
@@ -66,7 +63,6 @@ const Home: React.FC = () => {
                   onCategoriesUpdate={updateCategories}
                   selectedCategories={selectedCategories}
                 />
-
               </aside>
             </>
           )}

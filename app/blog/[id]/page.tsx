@@ -1,19 +1,23 @@
 "use client";
 import React from "react";
-import type { NextPage } from "next";
 import Header from "@/components/Header";
 import { TranslationProvider } from "@/contexts/TranslationsContext";
 import Footer from "@/components/Footer";
 import BlogPost from "@/components/blog/BlogPost";
+import HeroSection from "@/components/HeroSection";
 
-
-const PostDetail: NextPage = () => {
-
+const PostDetail: React.FC = () => {
   return (
     <TranslationProvider>
-      <div className="container" style={{ marginTop: "100px" }}>
-        <Header />
-        <main className={`flex flex-col md:flex-row`}>
+      {/* {loading && (
+        <div className="loading-screen">
+          <img src={"LOGO_FETCHIZY_BASELINE.png"} alt="Logo" />
+        </div>
+      )} */}
+      <Header />
+      <div className="container mb-10">
+        <main>
+          <HeroSection />
           <BlogPost />
         </main>
         <Footer />
