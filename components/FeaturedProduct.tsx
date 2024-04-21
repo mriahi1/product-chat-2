@@ -19,7 +19,6 @@ interface FeaturedProductProps {
 const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
   const [product, setProduct] = useState<Product>({} as Product);
   const [selectedImage, setSelectedImage] = useState<string>("");
-  // const [currency, setCurrency] = useState("€");
 
   const { t } = useTranslation();
 
@@ -27,10 +26,6 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
     setSelectedImage(props?.images[0]);
     setProduct(props);
   }, [props]);
-
-  // const handleThumbnailClick = (image: string) => {
-  //   setSelectedImage(image);
-  // };
 
   const {
     id,
@@ -50,38 +45,13 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
     return <div>{t?.("loading_product")}</div>;
   }
 
-  // const renderRating = (
-  //   value: number,
-  //   icon: string,
-  //   color: { active: string; inactive: string }
-  // ) => (
-  //   <>
-  //     <div className="flex items-center mr-4">{value.toFixed(1)}</div>
-  //     <div className="flex justify-between items-center w-full">
-  //       <div className="flex items-center">
-  //         {[...Array(5)].map((_, index) => (
-  //           <span
-  //             key={index}
-  //             className={`text-xl ${
-  //               index < Math.round(value) ? color.active : color.inactive
-  //             }`}
-  //           >
-  //             {icon}
-  //           </span>
-  //         ))}
-  //       </div>
-  //     </div>
-  //   </>
-  // );
-
   function truncateText(text: string, maxLength: number): string {
     if (text.length > maxLength) {
-      return text.substring(0, maxLength) + '...';
+      return text.substring(0, maxLength) + "...";
     } else {
       return text;
     }
   }
-  
 
   return (
     <div className="featured-product">
@@ -92,10 +62,13 @@ const FeaturedProduct: React.FC<FeaturedProductProps> = (props) => {
             <img src={images[0]} alt={title} className="image" />
           </div>
           <div className="details w-full md:w-1/2">
-            <div className="titleSection" style={{ display: "flex", justifyContent: "space-between" }}>
+            <div
+              className="titleSection"
+              style={{ display: "flex", justifyContent: "space-between" }}
+            >
               <div>
                 <h2 className="title">{truncateText(title, 50)}</h2>
-                <hr className="divider"/>
+                <hr className="divider" />
               </div>
               <div>
                 <p className="price">{price.toFixed(2)} €</p>

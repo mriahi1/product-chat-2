@@ -1,15 +1,15 @@
 // services/ApiService.ts
-import { Product } from '@/types/Product';
-import { env } from 'process';
+import { Product } from "@/types/Product";
+import { env } from "process";
 
-const API_ENDPOINT = env.API_ENDPOINT || 'https://fakestoreapi.com/products'
-const API_TOKEN = env.API_TOKEN || 'fake-token'
+const API_ENDPOINT = env.API_ENDPOINT || "https://fakestoreapi.com/products";
+const API_TOKEN = env.API_TOKEN || "fake-token";
 
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
     const response = await fetch(API_ENDPOINT, {
       headers: {
-        'Authorization': `Bearer ${API_TOKEN}`,
+        Authorization: `Bearer ${API_TOKEN}`,
       },
     });
 
@@ -21,6 +21,6 @@ export const fetchProducts = async (): Promise<Product[]> => {
   } catch (error) {
     console.error("Error fetching products:", error);
     // Return mock data or an empty array as fallback
-    return []; 
+    return [];
   }
 };

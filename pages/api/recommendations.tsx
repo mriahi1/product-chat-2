@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { chatBotConfig } from '@/config';
+import type { NextApiRequest, NextApiResponse } from "next";
+import { chatBotConfig } from "@/config";
 
 type Data = {
   message: string;
@@ -7,15 +7,17 @@ type Data = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Data>,
 ) {
-
-  const API_URL = process.env.NODE_ENV === 'production' ? chatBotConfig.apiUrl : chatBotConfig.stagingUrl;
+  const API_URL =
+    process.env.NODE_ENV === "production"
+      ? chatBotConfig.apiUrl
+      : chatBotConfig.stagingUrl;
 
   const externalApiResponse = await fetch(API_URL + "/recommendation", {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(req.body),
   });

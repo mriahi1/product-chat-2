@@ -1,5 +1,10 @@
-import React, { createContext, useContext, useState, PropsWithChildren } from 'react';
-import translations from '@/translations';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  PropsWithChildren,
+} from "react";
+import translations from "@/translations";
 
 // Define your translations with an index signature
 interface LanguageDictionary {
@@ -23,18 +28,20 @@ interface TranslationsContextProps {
   setLanguage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const TranslationsContext = createContext<TranslationsContextProps | null>(null);
+const TranslationsContext = createContext<TranslationsContextProps | null>(
+  null,
+);
 
 export const TranslationProvider: React.FC<PropsWithChildren> = ({
-  children
+  children,
 }) => {
-  const [language, setLanguage] = useState<string>('fr');
+  const [language, setLanguage] = useState<string>("fr");
   const t = (key: string) => {
     const langDictionary = translationsDict[language] || {};
-    return langDictionary[key] || '';
+    return langDictionary[key] || "";
   };
 
-  if (!language) return (<>Loading...</>);
+  if (!language) return <>Loading...</>;
 
   return (
     <TranslationsContext.Provider value={{ language, setLanguage, t }}>
@@ -43,4 +50,5 @@ export const TranslationProvider: React.FC<PropsWithChildren> = ({
   );
 };
 
-export const useTranslation = () => useContext(TranslationsContext) as TranslationsContextProps
+export const useTranslation = () =>
+  useContext(TranslationsContext) as TranslationsContextProps;

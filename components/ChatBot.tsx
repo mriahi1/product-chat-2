@@ -13,17 +13,11 @@ interface ChatBotProps {
 }
 
 const generateSessionId = () => {
-  // Simple unique ID generator - replace with your preferred method
-  return 'session_' + Math.random().toString(36).substr(2, 9);
+  return "session_" + Math.random().toString(36).substring(2, 11);
 };
 
-const ChatBot: React.FC<ChatBotProps> = ({
-  onProductSelect,
-  onProductsUpdate,
-  onCategoriesUpdate,
-  selectedCategories,
-}) => {
-  const [sessionId, setSessionId] = useState('');
+const ChatBot: React.FC<ChatBotProps> = ({ onProductsUpdate }) => {
+  const [sessionId, setSessionId] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const [isBotThinking, setIsBotThinking] = useState(false);
@@ -36,10 +30,10 @@ const ChatBot: React.FC<ChatBotProps> = ({
   const { t } = useTranslation();
 
   useEffect(() => {
-    let storedSessionId = localStorage.getItem('chatbotSessionId');
+    let storedSessionId = localStorage.getItem("chatbotSessionId");
     if (!storedSessionId) {
       storedSessionId = generateSessionId();
-      localStorage.setItem('chatbotSessionId', storedSessionId);
+      localStorage.setItem("chatbotSessionId", storedSessionId);
     }
     setSessionId(storedSessionId);
   }, []);
@@ -49,7 +43,6 @@ const ChatBot: React.FC<ChatBotProps> = ({
     { title: t("prompt1_title"), subtitle: t("prompt1_sub") },
     { title: t("prompt2_title"), subtitle: t("prompt2_sub") },
     { title: t("prompt3_title"), subtitle: t("prompt3_sub") },
-    // ... add more suggestions as needed
   ];
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -67,11 +60,13 @@ const ChatBot: React.FC<ChatBotProps> = ({
     ]);
 
     const topFiveCategories = categories.slice(0, 5);
-    const categoryMessages: ChatMessage[] = topFiveCategories.map(category => ({
-      sender: "bot",
-      content: category.name,
-      category: category
-    }));
+    const categoryMessages: ChatMessage[] = topFiveCategories.map(
+      (category) => ({
+        sender: "bot",
+        content: category.name,
+        category: category,
+      }),
+    );
 
     setMessages((prevMessages) => [...prevMessages, ...categoryMessages]);
   };
@@ -81,7 +76,6 @@ const ChatBot: React.FC<ChatBotProps> = ({
       window.open(category.amazon_url, "_blank");
     } else {
       setSelectionCount((prevCount) => prevCount + 1);
-      // performSearch(category.name);
       setSelectedSearchCategories((prevCategories) => [
         ...prevCategories,
         category,
@@ -93,8 +87,6 @@ const ChatBot: React.FC<ChatBotProps> = ({
     if (onProductsUpdate) {
       setMessages([]);
       onProductsUpdate([]);
-      // onProductSelect([]);
-      // onProductSelect();
     }
   };
 
@@ -109,13 +101,13 @@ const ChatBot: React.FC<ChatBotProps> = ({
 
     let mockProductData = async () => {
       return await import("@/data/mockProductData").then((module) =>
-        module.mockProductData()
+        module.mockProductData(),
       );
     };
 
     let mockCategoryData = async () => {
       return await import("@/data/mockCategoryData").then((module) =>
-        module.mockCategoryData()
+        module.mockCategoryData(),
       );
     };
 
@@ -123,7 +115,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
     categories = await mockCategoryData();
 
     const foundProduct = products.find((product) =>
-      product.title.toLowerCase().includes(lowerCaseUserInput)
+      product.title.toLowerCase().includes(lowerCaseUserInput),
     );
 
     return {
@@ -131,7 +123,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
       products: products,
       categories: categories,
       message: foundProduct
-        ? `${t("here_is_what_i_found")}: ${foundProduct.title}`
+        ? `${t("here_is_what_i_found")}: ${foundProduct.title} ${foundProduct.description}`
         : t("nothing_found"),
     };
   };
@@ -154,16 +146,15 @@ const ChatBot: React.FC<ChatBotProps> = ({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(
-          {
-            request_id: sessionId,
-            issuer_id: chatBotConfig.issuerId,
-            request_type: "category",
-            parameters: {
-              user_prompt: searchTerm,
-              prompt_type: actionType
-            }
-          }),
+        body: JSON.stringify({
+          request_id: sessionId,
+          issuer_id: chatBotConfig.issuerId,
+          request_type: "category",
+          parameters: {
+            user_prompt: searchTerm,
+            prompt_type: actionType,
+          },
+        }),
       });
 
       if (!response.ok) {
@@ -188,8 +179,6 @@ const ChatBot: React.FC<ChatBotProps> = ({
       setSearchPrompt(apiSearchPrompt);
     }
 
-    // let product: any;
-    // let products: any;
     let message: any;
     let categories: any;
     let responseData: any;
@@ -260,7 +249,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
       setSearchPrompt(newSearchTerm);
       performSearch(
         selectedSearchCategories[selectedSearchCategories.length - 1].name,
-        "category"
+        "category",
       );
     }
   }, [selectedSearchCategories]);
@@ -316,40 +305,52 @@ const ChatBot: React.FC<ChatBotProps> = ({
                       {suggestion.title} {suggestion.subtitle}
                     </button>
                   </div>
-                )
+                ),
               )}
             </>
           ) : (
             <div className="category-messages-container">
-              {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`break-words p-3 rounded-lg bubble mb-2 ${message.sender === "user"
-                    ? "message-content message-user bubble-right text-gray-800 align-left"
-                    : "message-content message-bot text-white align-right"
-                    } ${message.category ? "category-message" : ""}`}
-                >
-                  {message.category ? (
-                    <button
-                      onClick={() =>
-                        message.category &&
-                        handleCategoryClick(message.category)
-                      }
-                      className="category-button"
+              {messages.map(
+                (message, index) => (
+                  console.log(message),
+                  (
+                    <div
+                      key={index}
+                      className={`break-words p-3 rounded-lg bubble mb-2 ${
+                        message.sender === "user"
+                          ? "message-content message-user bubble-right text-gray-800 align-left"
+                          : "message-content message-bot bubble-left text-white align-right"
+                      } ${message.category ? "category-message" : ""}`}
                     >
-                      {message.content}
-                    </button>
-                  ) : (
-                    message.content
-                  )}
-                </div>
-              ))}
+                      {message.category ? (
+                        <>
+                          <button
+                            onClick={() =>
+                              message.category &&
+                              handleCategoryClick(message.category)
+                            }
+                            className="category-button rounded-lg p-2"
+                          >
+                            {message.category.name}
+                          </button>
+                          <span> </span>
+                          <div className="text-xs italic mt-2">
+                            <span></span>
+                            {message.category.description}
+                          </div>
+                        </>
+                      ) : (
+                        message.content
+                      )}
+                    </div>
+                  )
+                ),
+              )}
             </div>
           )}
           {isBotThinking && (
             <div className="loading-container">
               <div className="loader"></div>
-              <p>Loading...</p>
             </div>
           )}
 
@@ -363,7 +364,7 @@ const ChatBot: React.FC<ChatBotProps> = ({
             className="message-input"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
             maxLength={120}
           />
           <button onClick={handleSendMessage} className="send-button">
@@ -383,12 +384,15 @@ const ChatBot: React.FC<ChatBotProps> = ({
       </div>
 
       {messages?.length > 1 && (
-        <p
-          onClick={handleResetProductSelect}
-          className="flex-none text-gray-500 p-2 focus:outline-none reset-button"
-        >
-          {t?.("start_over")}
-        </p>
+        <div className="mt-4">
+          <button
+            onClick={handleResetProductSelect}
+            onKeyDown={handleKeyPress}
+            className="reset-button text-gray-500 hover:text-gray-800 mt-2 rounded-lg p-2"
+          >
+            {t?.("start_over")}
+          </button>
+        </div>
       )}
     </>
   );
